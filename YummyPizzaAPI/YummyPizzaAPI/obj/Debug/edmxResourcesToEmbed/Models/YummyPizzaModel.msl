@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PizzaShopModelStoreContainer" CdmEntityContainer="PizzaShopEntities">
+    <EntitySetMapping Name="Bases">
+      <EntityTypeMapping TypeName="PizzaShopModel.Base">
+        <MappingFragment StoreEntitySet="Base">
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Base_Type" ColumnName="Base_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Base_Price">
+      <EntityTypeMapping TypeName="PizzaShopModel.Base_Price">
+        <MappingFragment StoreEntitySet="Base_Price">
+          <ScalarProperty Name="Base_Price_ID" ColumnName="Base_Price_ID" />
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Base_Price_Date" ColumnName="Base_Price_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comboes">
+      <EntityTypeMapping TypeName="PizzaShopModel.Combo">
+        <MappingFragment StoreEntitySet="Combo">
+          <ScalarProperty Name="Combo_ID" ColumnName="Combo_ID" />
+          <ScalarProperty Name="Combo_Name" ColumnName="Combo_Name" />
+          <ScalarProperty Name="Combo_Price" ColumnName="Combo_Price" />
+          <ScalarProperty Name="Combo_Start_Date" ColumnName="Combo_Start_Date" />
+          <ScalarProperty Name="Combo_End_Date" ColumnName="Combo_End_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComboProducts">
+      <EntityTypeMapping TypeName="PizzaShopModel.ComboProduct">
+        <MappingFragment StoreEntitySet="ComboProduct">
+          <ScalarProperty Name="ComboProduct_ID" ColumnName="ComboProduct_ID" />
+          <ScalarProperty Name="Combo_ID" ColumnName="Combo_ID" />
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="PizzaShopModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+          <ScalarProperty Name="Company_Address" ColumnName="Company_Address" />
+          <ScalarProperty Name="Company_Contact" ColumnName="Company_Contact" />
+          <ScalarProperty Name="Account_Name" ColumnName="Account_Name" />
+          <ScalarProperty Name="Acount_Number" ColumnName="Acount_Number" />
+          <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+          <ScalarProperty Name="Account_Branch" ColumnName="Account_Branch" />
+          <ScalarProperty Name="Account_Bramch_Code" ColumnName="Account_Bramch_Code" />
+          <ScalarProperty Name="Owner_Email" ColumnName="Owner_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="PizzaShopModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Emp_Surname" ColumnName="Emp_Surname" />
+          <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
+          <ScalarProperty Name="Emp_Address" ColumnName="Emp_Address" />
+          <ScalarProperty Name="Emp_Contact" ColumnName="Emp_Contact" />
+          <ScalarProperty Name="Emp_ID_Number" ColumnName="Emp_ID_Number" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+          <ScalarProperty Name="Emp_Type_ID" ColumnName="Emp_Type_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_Shift">
+      <EntityTypeMapping TypeName="PizzaShopModel.Employee_Shift">
+        <MappingFragment StoreEntitySet="Employee_Shift">
+          <ScalarProperty Name="Emp_Shift_ID" ColumnName="Emp_Shift_ID" />
+          <ScalarProperty Name="Shift_ID" ColumnName="Shift_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Emp_Total_hours" ColumnName="Emp_Total_hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_Type">
+      <EntityTypeMapping TypeName="PizzaShopModel.Employee_Type">
+        <MappingFragment StoreEntitySet="Employee_Type">
+          <ScalarProperty Name="Emp_Type_ID" ColumnName="Emp_Type_ID" />
+          <ScalarProperty Name="Emp_Type_Name" ColumnName="Emp_Type_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Extras">
+      <EntityTypeMapping TypeName="PizzaShopModel.Extra">
+        <MappingFragment StoreEntitySet="Extra">
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+          <ScalarProperty Name="Extra_Name" ColumnName="Extra_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Extra_Price">
+      <EntityTypeMapping TypeName="PizzaShopModel.Extra_Price">
+        <MappingFragment StoreEntitySet="Extra_Price">
+          <ScalarProperty Name="Extra_Price_ID" ColumnName="Extra_Price_ID" />
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Extra_Price_Date" ColumnName="Extra_Price_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="PizzaShopModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+          <ScalarProperty Name="Gender_Descr" ColumnName="Gender_Descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="PizzaShopModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="Invoice_Total" ColumnName="Invoice_Total" />
+          <ScalarProperty Name="Amount_Tendered" ColumnName="Amount_Tendered" />
+          <ScalarProperty Name="Change" ColumnName="Change" />
+          <ScalarProperty Name="VAT_ID" ColumnName="VAT_ID" />
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="PMethod_ID" ColumnName="PMethod_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="PizzaShopModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Order_Status_ID" ColumnName="Order_Status_ID" />
+          <ScalarProperty Name="Order_Type_ID" ColumnName="Order_Type_ID" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="OTotal" ColumnName="OTotal" />
+          <ScalarProperty Name="Emp_Shift_ID" ColumnName="Emp_Shift_ID" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Status">
+      <EntityTypeMapping TypeName="PizzaShopModel.Order_Status">
+        <MappingFragment StoreEntitySet="Order_Status">
+          <ScalarProperty Name="Order_Status_ID" ColumnName="Order_Status_ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Type">
+      <EntityTypeMapping TypeName="PizzaShopModel.Order_Type">
+        <MappingFragment StoreEntitySet="Order_Type">
+          <ScalarProperty Name="Order_Type_ID" ColumnName="Order_Type_ID" />
+          <ScalarProperty Name="Order_Type1" ColumnName="Order_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderItems">
+      <EntityTypeMapping TypeName="PizzaShopModel.OrderItem">
+        <MappingFragment StoreEntitySet="OrderItem">
+          <ScalarProperty Name="OrderItem_ID" ColumnName="OrderItem_ID" />
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="Topping_ID" ColumnName="Topping_ID" />
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+          <ScalarProperty Name="Combo_ID" ColumnName="Combo_ID" />
+          <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pizzas">
+      <EntityTypeMapping TypeName="PizzaShopModel.Pizza">
+        <MappingFragment StoreEntitySet="Pizza">
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Pizza_Name" ColumnName="Pizza_Name" />
+          <ScalarProperty Name="Pizza_Desc" ColumnName="Pizza_Desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pizza_Price">
+      <EntityTypeMapping TypeName="PizzaShopModel.Pizza_Price">
+        <MappingFragment StoreEntitySet="Pizza_Price">
+          <ScalarProperty Name="Pizza_Price_ID" ColumnName="Pizza_Price_ID" />
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Pizza_Price_Date" ColumnName="Pizza_Price_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PMethods">
+      <EntityTypeMapping TypeName="PizzaShopModel.PMethod">
+        <MappingFragment StoreEntitySet="PMethod">
+          <ScalarProperty Name="PMethod_ID" ColumnName="PMethod_ID" />
+          <ScalarProperty Name="PMethod_Descr" ColumnName="PMethod_Descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prices">
+      <EntityTypeMapping TypeName="PizzaShopModel.Price">
+        <MappingFragment StoreEntitySet="Price">
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price1" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shifts">
+      <EntityTypeMapping TypeName="PizzaShopModel.Shift">
+        <MappingFragment StoreEntitySet="Shift">
+          <ScalarProperty Name="Shift_ID" ColumnName="Shift_ID" />
+          <ScalarProperty Name="Shift_Descr" ColumnName="Shift_Descr" />
+          <ScalarProperty Name="Shift_Date" ColumnName="Shift_Date" />
+          <ScalarProperty Name="Shift_start_Time" ColumnName="Shift_start_Time" />
+          <ScalarProperty Name="Shift_End_Time" ColumnName="Shift_End_Time" />
+          <ScalarProperty Name="Shift_Duration" ColumnName="Shift_Duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sizes">
+      <EntityTypeMapping TypeName="PizzaShopModel.Size">
+        <MappingFragment StoreEntitySet="Size">
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Size_Desc" ColumnName="Size_Desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Size_Price">
+      <EntityTypeMapping TypeName="PizzaShopModel.Size_Price">
+        <MappingFragment StoreEntitySet="Size_Price">
+          <ScalarProperty Name="Size_Price_ID" ColumnName="Size_Price_ID" />
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Size_Price_Date" ColumnName="Size_Price_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Toppings">
+      <EntityTypeMapping TypeName="PizzaShopModel.Topping">
+        <MappingFragment StoreEntitySet="Topping">
+          <ScalarProperty Name="Topping_ID" ColumnName="Topping_ID" />
+          <ScalarProperty Name="Topping_Name" ColumnName="Topping_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topping_Price">
+      <EntityTypeMapping TypeName="PizzaShopModel.Topping_Price">
+        <MappingFragment StoreEntitySet="Topping_Price">
+          <ScalarProperty Name="Topping_Price_ID" ColumnName="Topping_Price_ID" />
+          <ScalarProperty Name="Topping_ID" ColumnName="Topping_ID" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Topping_Price_Date" ColumnName="Topping_Price_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="PizzaShopModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VATs">
+      <EntityTypeMapping TypeName="PizzaShopModel.VAT">
+        <MappingFragment StoreEntitySet="VAT">
+          <ScalarProperty Name="Vat_ID" ColumnName="Vat_ID" />
+          <ScalarProperty Name="Vat_Percent" ColumnName="Vat_Percent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getBaseDetails" FunctionName="PizzaShopModel.Store.getBaseDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getBaseDetails_Result">
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Base_Type" ColumnName="Base_Type" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getExtraDetails" FunctionName="PizzaShopModel.Store.getExtraDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getExtraDetails_Result">
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+          <ScalarProperty Name="Extra_Name" ColumnName="Extra_Name" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getPizzaDetails" FunctionName="PizzaShopModel.Store.getPizzaDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getPizzaDetails_Result">
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Pizza_Name" ColumnName="Pizza_Name" />
+          <ScalarProperty Name="Pizza_Desc" ColumnName="Pizza_Desc" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getSizeDetails" FunctionName="PizzaShopModel.Store.getSizeDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getSizeDetails_Result">
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Size_Desc" ColumnName="Size_Desc" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getToppingDetails" FunctionName="PizzaShopModel.Store.getToppingDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getToppingDetails_Result">
+          <ScalarProperty Name="Topping_ID" ColumnName="Topping_ID" />
+          <ScalarProperty Name="Topping_Name" ColumnName="Topping_Name" />
+          <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getCombo" FunctionName="PizzaShopModel.Store.getCombo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PizzaShopModel.getCombo_Result">
+          <ScalarProperty Name="Combo_ID" ColumnName="Combo_ID" />
+          <ScalarProperty Name="Combo_Name" ColumnName="Combo_Name" />
+          <ScalarProperty Name="Combo_Price" ColumnName="Combo_Price" />
+          <ScalarProperty Name="Pizza_ID" ColumnName="Pizza_ID" />
+          <ScalarProperty Name="Pizza_Name" ColumnName="Pizza_Name" />
+          <ScalarProperty Name="Size_ID" ColumnName="Size_ID" />
+          <ScalarProperty Name="Size_Desc" ColumnName="Size_Desc" />
+          <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+          <ScalarProperty Name="Base_Type" ColumnName="Base_Type" />
+          <ScalarProperty Name="Extra_ID" ColumnName="Extra_ID" />
+          <ScalarProperty Name="Extra_Name" ColumnName="Extra_Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

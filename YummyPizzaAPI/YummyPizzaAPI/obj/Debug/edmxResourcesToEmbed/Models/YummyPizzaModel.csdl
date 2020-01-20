@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PizzaShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Base">
+    <Key>
+      <PropertyRef Name="Base_ID" />
+    </Key>
+    <Property Name="Base_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Base_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Base_Price" Relationship="Self.FK__Base_Pric__Base___4D94879B" FromRole="Base" ToRole="Base_Price" />
+    <NavigationProperty Name="ComboProducts" Relationship="Self.FK__ComboProd__Base___6D0D32F4" FromRole="Base" ToRole="ComboProduct" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Base___02084FDA" FromRole="Base" ToRole="OrderItem" />
+  </EntityType>
+  <EntityType Name="Base_Price">
+    <Key>
+      <PropertyRef Name="Base_Price_ID" />
+    </Key>
+    <Property Name="Base_Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Base_ID" Type="Int32" />
+    <Property Name="Price_ID" Type="Int32" />
+    <Property Name="Base_Price_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Base" Relationship="Self.FK__Base_Pric__Base___4D94879B" FromRole="Base_Price" ToRole="Base" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Base_Pric__Price__4E88ABD4" FromRole="Base_Price" ToRole="Price" />
+  </EntityType>
+  <EntityType Name="Combo">
+    <Key>
+      <PropertyRef Name="Combo_ID" />
+    </Key>
+    <Property Name="Combo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Combo_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Combo_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Combo_Start_Date" Type="DateTime" Precision="0" />
+    <Property Name="Combo_End_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ComboProducts" Relationship="Self.FK__ComboProd__Combo__6A30C649" FromRole="Combo" ToRole="ComboProduct" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Combo__03F0984C" FromRole="Combo" ToRole="OrderItem" />
+  </EntityType>
+  <EntityType Name="ComboProduct">
+    <Key>
+      <PropertyRef Name="ComboProduct_ID" />
+    </Key>
+    <Property Name="ComboProduct_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Combo_ID" Type="Int32" />
+    <Property Name="Pizza_ID" Type="Int32" />
+    <Property Name="Size_ID" Type="Int32" />
+    <Property Name="Base_ID" Type="Int32" />
+    <Property Name="Extra_ID" Type="Int32" />
+    <NavigationProperty Name="Base" Relationship="Self.FK__ComboProd__Base___6D0D32F4" FromRole="ComboProduct" ToRole="Base" />
+    <NavigationProperty Name="Combo" Relationship="Self.FK__ComboProd__Combo__6A30C649" FromRole="ComboProduct" ToRole="Combo" />
+    <NavigationProperty Name="Extra" Relationship="Self.FK__ComboProd__Extra__6E01572D" FromRole="ComboProduct" ToRole="Extra" />
+    <NavigationProperty Name="Pizza" Relationship="Self.FK__ComboProd__Pizza__6B24EA82" FromRole="ComboProduct" ToRole="Pizza" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__ComboProd__Size___6C190EBB" FromRole="ComboProduct" ToRole="Size" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Company_ID" />
+    </Key>
+    <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Account_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Acount_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Account_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Account_Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Account_Bramch_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Owner_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Emp_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emp_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emp_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emp_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emp_Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Emp_ID_Number" Type="Decimal" Precision="13" Scale="0" />
+    <Property Name="User_ID" Type="Int32" />
+    <Property Name="Gender_ID" Type="Int32" />
+    <Property Name="Emp_Type_ID" Type="Int32" />
+    <NavigationProperty Name="Employee_Shift" Relationship="Self.FK__Employee___Emplo__46E78A0C" FromRole="Employee" ToRole="Employee_Shift" />
+    <NavigationProperty Name="Employee_Type" Relationship="Self.FK__Employee__Emp_Ty__412EB0B6" FromRole="Employee" ToRole="Employee_Type" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Employee__Gender__403A8C7D" FromRole="Employee" ToRole="Gender" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Employee__User_I__3F466844" FromRole="Employee" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Employee_Shift">
+    <Key>
+      <PropertyRef Name="Emp_Shift_ID" />
+    </Key>
+    <Property Name="Emp_Shift_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Shift_ID" Type="Int32" />
+    <Property Name="Employee_ID" Type="Int32" />
+    <Property Name="Emp_Total_hours" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee___Emplo__46E78A0C" FromRole="Employee_Shift" ToRole="Employee" />
+    <NavigationProperty Name="Shift" Relationship="Self.FK__Employee___Shift__45F365D3" FromRole="Employee_Shift" ToRole="Shift" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__Emp_Shift__7A672E12" FromRole="Employee_Shift" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Employee_Type">
+    <Key>
+      <PropertyRef Name="Emp_Type_ID" />
+    </Key>
+    <Property Name="Emp_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Emp_Type_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Emp_Ty__412EB0B6" FromRole="Employee_Type" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Extra">
+    <Key>
+      <PropertyRef Name="Extra_ID" />
+    </Key>
+    <Property Name="Extra_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Extra_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ComboProducts" Relationship="Self.FK__ComboProd__Extra__6E01572D" FromRole="Extra" ToRole="ComboProduct" />
+    <NavigationProperty Name="Extra_Price" Relationship="Self.FK__Extra_Pri__Extra__6477ECF3" FromRole="Extra" ToRole="Extra_Price" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Extra__02FC7413" FromRole="Extra" ToRole="OrderItem" />
+  </EntityType>
+  <EntityType Name="Extra_Price">
+    <Key>
+      <PropertyRef Name="Extra_Price_ID" />
+    </Key>
+    <Property Name="Extra_Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Extra_ID" Type="Int32" />
+    <Property Name="Price_ID" Type="Int32" />
+    <Property Name="Extra_Price_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Extra" Relationship="Self.FK__Extra_Pri__Extra__6477ECF3" FromRole="Extra_Price" ToRole="Extra" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Extra_Pri__Price__656C112C" FromRole="Extra_Price" ToRole="Price" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Gender_ID" />
+    </Key>
+    <Property Name="Gender_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gender_Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Gender__403A8C7D" FromRole="Gender" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="Invoice_ID" />
+    </Key>
+    <Property Name="Invoice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Invoice_Total" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Amount_Tendered" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Change" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="VAT_ID" Type="Int32" />
+    <Property Name="Order_ID" Type="Int32" />
+    <Property Name="PMethod_ID" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Invoice__Order_I__07C12930" FromRole="Invoice" ToRole="Order" />
+    <NavigationProperty Name="PMethod" Relationship="Self.FK__Invoice__PMethod__08B54D69" FromRole="Invoice" ToRole="PMethod" />
+    <NavigationProperty Name="VAT" Relationship="Self.FK__Invoice__VAT_ID__06CD04F7" FromRole="Invoice" ToRole="VAT" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_No" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Order_Status_ID" Type="Int32" />
+    <Property Name="Order_Type_ID" Type="Int32" />
+    <Property Name="Order_Date" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="OTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Emp_Shift_ID" Type="Int32" />
+    <Property Name="User_ID" Type="Int32" />
+    <NavigationProperty Name="Employee_Shift" Relationship="Self.FK__Order__Emp_Shift__7A672E12" FromRole="Order" ToRole="Employee_Shift" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Order_I__07C12930" FromRole="Order" ToRole="Invoice" />
+    <NavigationProperty Name="Order_Status" Relationship="Self.FK__Order__Order_Sta__787EE5A0" FromRole="Order" ToRole="Order_Status" />
+    <NavigationProperty Name="Order_Type" Relationship="Self.FK__Order__Order_Typ__797309D9" FromRole="Order" ToRole="Order_Type" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Order__User_ID__7B5B524B" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Order__7E37BEF6" FromRole="Order" ToRole="OrderItem" />
+  </EntityType>
+  <EntityType Name="Order_Status">
+    <Key>
+      <PropertyRef Name="Order_Status_ID" />
+    </Key>
+    <Property Name="Order_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__Order_Sta__787EE5A0" FromRole="Order_Status" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order_Type">
+    <Key>
+      <PropertyRef Name="Order_Type_ID" />
+    </Key>
+    <Property Name="Order_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_Type1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__Order_Typ__797309D9" FromRole="Order_Type" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="OrderItem_ID" />
+    </Key>
+    <Property Name="OrderItem_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_ID" Type="Int32" />
+    <Property Name="Topping_ID" Type="Int32" />
+    <Property Name="Pizza_ID" Type="Int32" />
+    <Property Name="Size_ID" Type="Int32" />
+    <Property Name="Base_ID" Type="Int32" />
+    <Property Name="Extra_ID" Type="Int32" />
+    <Property Name="Combo_ID" Type="Int32" />
+    <Property Name="Order_Quantity" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Base" Relationship="Self.FK__OrderItem__Base___02084FDA" FromRole="OrderItem" ToRole="Base" />
+    <NavigationProperty Name="Combo" Relationship="Self.FK__OrderItem__Combo__03F0984C" FromRole="OrderItem" ToRole="Combo" />
+    <NavigationProperty Name="Extra" Relationship="Self.FK__OrderItem__Extra__02FC7413" FromRole="OrderItem" ToRole="Extra" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderItem__Order__7E37BEF6" FromRole="OrderItem" ToRole="Order" />
+    <NavigationProperty Name="Pizza" Relationship="Self.FK__OrderItem__Pizza__00200768" FromRole="OrderItem" ToRole="Pizza" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__OrderItem__Size___01142BA1" FromRole="OrderItem" ToRole="Size" />
+    <NavigationProperty Name="Topping" Relationship="Self.FK__OrderItem__Toppi__7F2BE32F" FromRole="OrderItem" ToRole="Topping" />
+  </EntityType>
+  <EntityType Name="Pizza">
+    <Key>
+      <PropertyRef Name="Pizza_ID" />
+    </Key>
+    <Property Name="Pizza_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pizza_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Pizza_Desc" Type="String" MaxLength="140" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ComboProducts" Relationship="Self.FK__ComboProd__Pizza__6B24EA82" FromRole="Pizza" ToRole="ComboProduct" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Pizza__00200768" FromRole="Pizza" ToRole="OrderItem" />
+    <NavigationProperty Name="Pizza_Price" Relationship="Self.FK__Pizza_Pri__Pizza__5EBF139D" FromRole="Pizza" ToRole="Pizza_Price" />
+  </EntityType>
+  <EntityType Name="Pizza_Price">
+    <Key>
+      <PropertyRef Name="Pizza_Price_ID" />
+    </Key>
+    <Property Name="Pizza_Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pizza_ID" Type="Int32" />
+    <Property Name="Price_ID" Type="Int32" />
+    <Property Name="Pizza_Price_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Pizza" Relationship="Self.FK__Pizza_Pri__Pizza__5EBF139D" FromRole="Pizza_Price" ToRole="Pizza" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Pizza_Pri__Price__5FB337D6" FromRole="Pizza_Price" ToRole="Price" />
+  </EntityType>
+  <EntityType Name="PMethod">
+    <Key>
+      <PropertyRef Name="PMethod_ID" />
+    </Key>
+    <Property Name="PMethod_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PMethod_Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__PMethod__08B54D69" FromRole="PMethod" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="Price_ID" />
+    </Key>
+    <Property Name="Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price1" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Base_Price" Relationship="Self.FK__Base_Pric__Price__4E88ABD4" FromRole="Price" ToRole="Base_Price" />
+    <NavigationProperty Name="Extra_Price" Relationship="Self.FK__Extra_Pri__Price__656C112C" FromRole="Price" ToRole="Extra_Price" />
+    <NavigationProperty Name="Pizza_Price" Relationship="Self.FK__Pizza_Pri__Price__5FB337D6" FromRole="Price" ToRole="Pizza_Price" />
+    <NavigationProperty Name="Size_Price" Relationship="Self.FK__Size_Pric__Price__5441852A" FromRole="Price" ToRole="Size_Price" />
+    <NavigationProperty Name="Topping_Price" Relationship="Self.FK__Topping_P__Price__59FA5E80" FromRole="Price" ToRole="Topping_Price" />
+  </EntityType>
+  <EntityType Name="Shift">
+    <Key>
+      <PropertyRef Name="Shift_ID" />
+    </Key>
+    <Property Name="Shift_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Shift_Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shift_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shift_start_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shift_End_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shift_Duration" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Employee_Shift" Relationship="Self.FK__Employee___Shift__45F365D3" FromRole="Shift" ToRole="Employee_Shift" />
+  </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Size_ID" />
+    </Key>
+    <Property Name="Size_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Size_Desc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ComboProducts" Relationship="Self.FK__ComboProd__Size___6C190EBB" FromRole="Size" ToRole="ComboProduct" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Size___01142BA1" FromRole="Size" ToRole="OrderItem" />
+    <NavigationProperty Name="Size_Price" Relationship="Self.FK__Size_Pric__Size___534D60F1" FromRole="Size" ToRole="Size_Price" />
+  </EntityType>
+  <EntityType Name="Size_Price">
+    <Key>
+      <PropertyRef Name="Size_Price_ID" />
+    </Key>
+    <Property Name="Size_Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Size_ID" Type="Int32" />
+    <Property Name="Price_ID" Type="Int32" />
+    <Property Name="Size_Price_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Size_Pric__Price__5441852A" FromRole="Size_Price" ToRole="Price" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__Size_Pric__Size___534D60F1" FromRole="Size_Price" ToRole="Size" />
+  </EntityType>
+  <EntityType Name="Topping">
+    <Key>
+      <PropertyRef Name="Topping_ID" />
+    </Key>
+    <Property Name="Topping_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Topping_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Toppi__7F2BE32F" FromRole="Topping" ToRole="OrderItem" />
+    <NavigationProperty Name="Topping_Price" Relationship="Self.FK__Topping_P__Toppi__59063A47" FromRole="Topping" ToRole="Topping_Price" />
+  </EntityType>
+  <EntityType Name="Topping_Price">
+    <Key>
+      <PropertyRef Name="Topping_Price_ID" />
+    </Key>
+    <Property Name="Topping_Price_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Topping_ID" Type="Int32" />
+    <Property Name="Price_ID" Type="Int32" />
+    <Property Name="Topping_Price_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Topping_P__Price__59FA5E80" FromRole="Topping_Price" ToRole="Price" />
+    <NavigationProperty Name="Topping" Relationship="Self.FK__Topping_P__Toppi__59063A47" FromRole="Topping_Price" ToRole="Topping" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Last_Login" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="User_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__User_I__3F466844" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__User_ID__7B5B524B" FromRole="User" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="VAT">
+    <Key>
+      <PropertyRef Name="Vat_ID" />
+    </Key>
+    <Property Name="Vat_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Vat_Percent" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__VAT_ID__06CD04F7" FromRole="VAT" ToRole="Invoice" />
+  </EntityType>
+  <Association Name="FK__Base_Pric__Base___4D94879B">
+    <End Role="Base" Type="Self.Base" Multiplicity="0..1" />
+    <End Role="Base_Price" Type="Self.Base_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Base">
+        <PropertyRef Name="Base_ID" />
+      </Principal>
+      <Dependent Role="Base_Price">
+        <PropertyRef Name="Base_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ComboProd__Base___6D0D32F4">
+    <End Role="Base" Type="Self.Base" Multiplicity="0..1" />
+    <End Role="ComboProduct" Type="Self.ComboProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Base">
+        <PropertyRef Name="Base_ID" />
+      </Principal>
+      <Dependent Role="ComboProduct">
+        <PropertyRef Name="Base_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Base___02084FDA">
+    <End Role="Base" Type="Self.Base" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Base">
+        <PropertyRef Name="Base_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Base_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Base_Pric__Price__4E88ABD4">
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <End Role="Base_Price" Type="Self.Base_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Price_ID" />
+      </Principal>
+      <Dependent Role="Base_Price">
+        <PropertyRef Name="Price_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ComboProd__Combo__6A30C649">
+    <End Role="Combo" Type="Self.Combo" Multiplicity="0..1" />
+    <End Role="ComboProduct" Type="Self.ComboProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Combo">
+        <PropertyRef Name="Combo_ID" />
+      </Principal>
+      <Dependent Role="ComboProduct">
+        <PropertyRef Name="Combo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Combo__03F0984C">
+    <End Role="Combo" Type="Self.Combo" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Combo">
+        <PropertyRef Name="Combo_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Combo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ComboProd__Extra__6E01572D">
+    <End Role="Extra" Type="Self.Extra" Multiplicity="0..1" />
+    <End Role="ComboProduct" Type="Self.ComboProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extra">
+        <PropertyRef Name="Extra_ID" />
+      </Principal>
+      <Dependent Role="ComboProduct">
+        <PropertyRef Name="Extra_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ComboProd__Pizza__6B24EA82">
+    <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1" />
+    <End Role="ComboProduct" Type="Self.ComboProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizza">
+        <PropertyRef Name="Pizza_ID" />
+      </Principal>
+      <Dependent Role="ComboProduct">
+        <PropertyRef Name="Pizza_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ComboProd__Size___6C190EBB">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="ComboProduct" Type="Self.ComboProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Size_ID" />
+      </Principal>
+      <Dependent Role="ComboProduct">
+        <PropertyRef Name="Size_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Emplo__46E78A0C">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Employee_Shift" Type="Self.Employee_Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Employee_Shift">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__Emp_Ty__412EB0B6">
+    <End Role="Employee_Type" Type="Self.Employee_Type" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee_Type">
+        <PropertyRef Name="Emp_Type_ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Emp_Type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__Gender__403A8C7D">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Gender_ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Gender_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__User_I__3F466844">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="User_ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Shift__45F365D3">
+    <End Role="Shift" Type="Self.Shift" Multiplicity="0..1" />
+    <End Role="Employee_Shift" Type="Self.Employee_Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shift">
+        <PropertyRef Name="Shift_ID" />
+      </Principal>
+      <Dependent Role="Employee_Shift">
+        <PropertyRef Name="Shift_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__Emp_Shift__7A672E12">
+    <End Role="Employee_Shift" Type="Self.Employee_Shift" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee_Shift">
+        <PropertyRef Name="Emp_Shift_ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Emp_Shift_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Extra_Pri__Extra__6477ECF3">
+    <End Role="Extra" Type="Self.Extra" Multiplicity="0..1" />
+    <End Role="Extra_Price" Type="Self.Extra_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extra">
+        <PropertyRef Name="Extra_ID" />
+      </Principal>
+      <Dependent Role="Extra_Price">
+        <PropertyRef Name="Extra_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Extra__02FC7413">
+    <End Role="Extra" Type="Self.Extra" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extra">
+        <PropertyRef Name="Extra_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Extra_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Extra_Pri__Price__656C112C">
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <End Role="Extra_Price" Type="Self.Extra_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Price_ID" />
+      </Principal>
+      <Dependent Role="Extra_Price">
+        <PropertyRef Name="Price_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__Order_I__07C12930">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Order_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__PMethod__08B54D69">
+    <End Role="PMethod" Type="Self.PMethod" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PMethod">
+        <PropertyRef Name="PMethod_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="PMethod_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__VAT_ID__06CD04F7">
+    <End Role="VAT" Type="Self.VAT" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VAT">
+        <PropertyRef Name="Vat_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="VAT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__Order_Sta__787EE5A0">
+    <End Role="Order_Status" Type="Self.Order_Status" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order_Status">
+        <PropertyRef Name="Order_Status_ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Order_Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__Order_Typ__797309D9">
+    <End Role="Order_Type" Type="Self.Order_Type" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order_Type">
+        <PropertyRef Name="Order_Type_ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Order_Type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__User_ID__7B5B524B">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="User_ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Order__7E37BEF6">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Order_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Pizza__00200768">
+    <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizza">
+        <PropertyRef Name="Pizza_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Pizza_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Size___01142BA1">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Size_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Size_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderItem__Toppi__7F2BE32F">
+    <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topping">
+        <PropertyRef Name="Topping_ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="Topping_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pizza_Pri__Pizza__5EBF139D">
+    <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1" />
+    <End Role="Pizza_Price" Type="Self.Pizza_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizza">
+        <PropertyRef Name="Pizza_ID" />
+      </Principal>
+      <Dependent Role="Pizza_Price">
+        <PropertyRef Name="Pizza_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pizza_Pri__Price__5FB337D6">
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <End Role="Pizza_Price" Type="Self.Pizza_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Price_ID" />
+      </Principal>
+      <Dependent Role="Pizza_Price">
+        <PropertyRef Name="Price_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Size_Pric__Price__5441852A">
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <End Role="Size_Price" Type="Self.Size_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Price_ID" />
+      </Principal>
+      <Dependent Role="Size_Price">
+        <PropertyRef Name="Price_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Topping_P__Price__59FA5E80">
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <End Role="Topping_Price" Type="Self.Topping_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Price_ID" />
+      </Principal>
+      <Dependent Role="Topping_Price">
+        <PropertyRef Name="Price_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Size_Pric__Size___534D60F1">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="Size_Price" Type="Self.Size_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Size_ID" />
+      </Principal>
+      <Dependent Role="Size_Price">
+        <PropertyRef Name="Size_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Topping_P__Toppi__59063A47">
+    <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+    <End Role="Topping_Price" Type="Self.Topping_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topping">
+        <PropertyRef Name="Topping_ID" />
+      </Principal>
+      <Dependent Role="Topping_Price">
+        <PropertyRef Name="Topping_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PizzaShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bases" EntityType="Self.Base" />
+    <EntitySet Name="Base_Price" EntityType="Self.Base_Price" />
+    <EntitySet Name="Comboes" EntityType="Self.Combo" />
+    <EntitySet Name="ComboProducts" EntityType="Self.ComboProduct" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Employee_Shift" EntityType="Self.Employee_Shift" />
+    <EntitySet Name="Employee_Type" EntityType="Self.Employee_Type" />
+    <EntitySet Name="Extras" EntityType="Self.Extra" />
+    <EntitySet Name="Extra_Price" EntityType="Self.Extra_Price" />
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Order_Status" EntityType="Self.Order_Status" />
+    <EntitySet Name="Order_Type" EntityType="Self.Order_Type" />
+    <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+    <EntitySet Name="Pizzas" EntityType="Self.Pizza" />
+    <EntitySet Name="Pizza_Price" EntityType="Self.Pizza_Price" />
+    <EntitySet Name="PMethods" EntityType="Self.PMethod" />
+    <EntitySet Name="Prices" EntityType="Self.Price" />
+    <EntitySet Name="Shifts" EntityType="Self.Shift" />
+    <EntitySet Name="Sizes" EntityType="Self.Size" />
+    <EntitySet Name="Size_Price" EntityType="Self.Size_Price" />
+    <EntitySet Name="Toppings" EntityType="Self.Topping" />
+    <EntitySet Name="Topping_Price" EntityType="Self.Topping_Price" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="VATs" EntityType="Self.VAT" />
+    <AssociationSet Name="FK__Base_Pric__Base___4D94879B" Association="Self.FK__Base_Pric__Base___4D94879B">
+      <End Role="Base" EntitySet="Bases" />
+      <End Role="Base_Price" EntitySet="Base_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ComboProd__Base___6D0D32F4" Association="Self.FK__ComboProd__Base___6D0D32F4">
+      <End Role="Base" EntitySet="Bases" />
+      <End Role="ComboProduct" EntitySet="ComboProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Base___02084FDA" Association="Self.FK__OrderItem__Base___02084FDA">
+      <End Role="Base" EntitySet="Bases" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Base_Pric__Price__4E88ABD4" Association="Self.FK__Base_Pric__Price__4E88ABD4">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Base_Price" EntitySet="Base_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ComboProd__Combo__6A30C649" Association="Self.FK__ComboProd__Combo__6A30C649">
+      <End Role="Combo" EntitySet="Comboes" />
+      <End Role="ComboProduct" EntitySet="ComboProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Combo__03F0984C" Association="Self.FK__OrderItem__Combo__03F0984C">
+      <End Role="Combo" EntitySet="Comboes" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ComboProd__Extra__6E01572D" Association="Self.FK__ComboProd__Extra__6E01572D">
+      <End Role="Extra" EntitySet="Extras" />
+      <End Role="ComboProduct" EntitySet="ComboProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ComboProd__Pizza__6B24EA82" Association="Self.FK__ComboProd__Pizza__6B24EA82">
+      <End Role="Pizza" EntitySet="Pizzas" />
+      <End Role="ComboProduct" EntitySet="ComboProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ComboProd__Size___6C190EBB" Association="Self.FK__ComboProd__Size___6C190EBB">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="ComboProduct" EntitySet="ComboProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Emplo__46E78A0C" Association="Self.FK__Employee___Emplo__46E78A0C">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Employee_Shift" EntitySet="Employee_Shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__Emp_Ty__412EB0B6" Association="Self.FK__Employee__Emp_Ty__412EB0B6">
+      <End Role="Employee_Type" EntitySet="Employee_Type" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__Gender__403A8C7D" Association="Self.FK__Employee__Gender__403A8C7D">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__User_I__3F466844" Association="Self.FK__Employee__User_I__3F466844">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Shift__45F365D3" Association="Self.FK__Employee___Shift__45F365D3">
+      <End Role="Shift" EntitySet="Shifts" />
+      <End Role="Employee_Shift" EntitySet="Employee_Shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__Emp_Shift__7A672E12" Association="Self.FK__Order__Emp_Shift__7A672E12">
+      <End Role="Employee_Shift" EntitySet="Employee_Shift" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Extra_Pri__Extra__6477ECF3" Association="Self.FK__Extra_Pri__Extra__6477ECF3">
+      <End Role="Extra" EntitySet="Extras" />
+      <End Role="Extra_Price" EntitySet="Extra_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Extra__02FC7413" Association="Self.FK__OrderItem__Extra__02FC7413">
+      <End Role="Extra" EntitySet="Extras" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Extra_Pri__Price__656C112C" Association="Self.FK__Extra_Pri__Price__656C112C">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Extra_Price" EntitySet="Extra_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__Order_I__07C12930" Association="Self.FK__Invoice__Order_I__07C12930">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__PMethod__08B54D69" Association="Self.FK__Invoice__PMethod__08B54D69">
+      <End Role="PMethod" EntitySet="PMethods" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__VAT_ID__06CD04F7" Association="Self.FK__Invoice__VAT_ID__06CD04F7">
+      <End Role="VAT" EntitySet="VATs" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__Order_Sta__787EE5A0" Association="Self.FK__Order__Order_Sta__787EE5A0">
+      <End Role="Order_Status" EntitySet="Order_Status" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__Order_Typ__797309D9" Association="Self.FK__Order__Order_Typ__797309D9">
+      <End Role="Order_Type" EntitySet="Order_Type" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__User_ID__7B5B524B" Association="Self.FK__Order__User_ID__7B5B524B">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Order__7E37BEF6" Association="Self.FK__OrderItem__Order__7E37BEF6">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Pizza__00200768" Association="Self.FK__OrderItem__Pizza__00200768">
+      <End Role="Pizza" EntitySet="Pizzas" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Size___01142BA1" Association="Self.FK__OrderItem__Size___01142BA1">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Toppi__7F2BE32F" Association="Self.FK__OrderItem__Toppi__7F2BE32F">
+      <End Role="Topping" EntitySet="Toppings" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pizza_Pri__Pizza__5EBF139D" Association="Self.FK__Pizza_Pri__Pizza__5EBF139D">
+      <End Role="Pizza" EntitySet="Pizzas" />
+      <End Role="Pizza_Price" EntitySet="Pizza_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pizza_Pri__Price__5FB337D6" Association="Self.FK__Pizza_Pri__Price__5FB337D6">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Pizza_Price" EntitySet="Pizza_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Size_Pric__Price__5441852A" Association="Self.FK__Size_Pric__Price__5441852A">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Size_Price" EntitySet="Size_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Topping_P__Price__59FA5E80" Association="Self.FK__Topping_P__Price__59FA5E80">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Topping_Price" EntitySet="Topping_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Size_Pric__Size___534D60F1" Association="Self.FK__Size_Pric__Size___534D60F1">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="Size_Price" EntitySet="Size_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Topping_P__Toppi__59063A47" Association="Self.FK__Topping_P__Toppi__59063A47">
+      <End Role="Topping" EntitySet="Toppings" />
+      <End Role="Topping_Price" EntitySet="Topping_Price" />
+    </AssociationSet>
+    <FunctionImport Name="getBaseDetails" ReturnType="Collection(PizzaShopModel.getBaseDetails_Result)" />
+    <FunctionImport Name="getExtraDetails" ReturnType="Collection(PizzaShopModel.getExtraDetails_Result)" />
+    <FunctionImport Name="getPizzaDetails" ReturnType="Collection(PizzaShopModel.getPizzaDetails_Result)" />
+    <FunctionImport Name="getSizeDetails" ReturnType="Collection(PizzaShopModel.getSizeDetails_Result)" />
+    <FunctionImport Name="getToppingDetails" ReturnType="Collection(PizzaShopModel.getToppingDetails_Result)" />
+    <FunctionImport Name="getCombo" ReturnType="Collection(PizzaShopModel.getCombo_Result)" />
+  </EntityContainer>
+  <ComplexType Name="getBaseDetails_Result">
+    <Property Type="Int32" Name="Base_ID" Nullable="false" />
+    <Property Type="String" Name="Base_Type" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Price_ID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="getExtraDetails_Result">
+    <Property Type="Int32" Name="Extra_ID" Nullable="false" />
+    <Property Type="String" Name="Extra_Name" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Price_ID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="getPizzaDetails_Result">
+    <Property Type="Int32" Name="Pizza_ID" Nullable="false" />
+    <Property Type="String" Name="Pizza_Name" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Pizza_Desc" Nullable="true" MaxLength="140" />
+    <Property Type="Int32" Name="Price_ID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="getSizeDetails_Result">
+    <Property Type="Int32" Name="Size_ID" Nullable="false" />
+    <Property Type="String" Name="Size_Desc" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Price_ID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="getToppingDetails_Result">
+    <Property Type="Int32" Name="Topping_ID" Nullable="false" />
+    <Property Type="String" Name="Topping_Name" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Price_ID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="getCombo_Result">
+    <Property Type="Int32" Name="Combo_ID" Nullable="false" />
+    <Property Type="String" Name="Combo_Name" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Combo_Price" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="Pizza_ID" Nullable="false" />
+    <Property Type="String" Name="Pizza_Name" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Size_ID" Nullable="false" />
+    <Property Type="String" Name="Size_Desc" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Base_ID" Nullable="false" />
+    <Property Type="String" Name="Base_Type" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Extra_ID" Nullable="false" />
+    <Property Type="String" Name="Extra_Name" Nullable="true" MaxLength="20" />
+  </ComplexType>
+</Schema>
