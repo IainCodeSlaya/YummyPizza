@@ -20,6 +20,8 @@ namespace YummyPizzaAPI.Models
         public PizzaShopEntities()
             : base("name=PizzaShopEntities")
         {
+            base.Configuration.ProxyCreationEnabled = false;
+            base.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
