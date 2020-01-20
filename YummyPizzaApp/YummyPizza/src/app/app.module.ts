@@ -12,13 +12,15 @@ import { OrderItemsComponent } from './orders/order-items/order-items.component'
 import { OrderComponent } from './orders/order/order.component';
 import { Pizza } from './shared/pizza.model';
 import { OrderService } from './shared/order.service';
+import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderComponent,
     OrdersComponent,
-    OrderItemsComponent
+    OrderItemsComponent,
+    PizzaorderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { OrderService } from './shared/order.service';
     HttpClientModule,
     FormsModule
   ],
+  entryComponents: [PizzaorderComponent],
   providers: [OrderService ],
   bootstrap: [AppComponent]
 })

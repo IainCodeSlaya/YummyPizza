@@ -7,6 +7,8 @@ import { Extra } from 'src/app/shared/extra.model';
 import { Size } from 'src/app/shared/size.model';
 import { Topping } from 'src/app/shared/topping.model';
 import { Combo } from 'src/app/shared/combo.model';
+import { PizzaorderComponent } from '../pizzaorder/pizzaorder.component';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order',
@@ -22,7 +24,8 @@ export class OrderComponent implements OnInit {
   comboList: Combo[];
 
   constructor(
-    private Orderservice: OrderService
+    private Orderservice: OrderService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -93,4 +96,12 @@ export class OrderComponent implements OnInit {
     // this.o.exerciseplanday = [];
   }
 
+  CreatePizzaOrder(Pizza_ID) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data = { Pizza_ID };
+    this.dialog.open(PizzaorderComponent, dialogConfig);
+  }
 }

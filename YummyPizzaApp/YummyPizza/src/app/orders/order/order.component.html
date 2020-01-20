@@ -21,7 +21,7 @@
             <td>{{ item.Pizza_Desc }}</td>
             <td>R{{ item.Price }}</td>
             <td>
-                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+                <a (click)="CreatePizzaOrder(Orderservice.pizzaData.Pizza_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
             </td>
         </tr>
         </tbody>

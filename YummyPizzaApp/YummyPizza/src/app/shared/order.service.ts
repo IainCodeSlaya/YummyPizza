@@ -7,6 +7,7 @@ import { Extra } from './extra.model';
 import { Size } from './size.model';
 import { Topping } from './topping.model';
 import { Combo } from './combo.model';
+import { Indpizza } from './indpizza.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class OrderService {
   sizeData: Size;
   toppingData: Topping;
   comboData: Combo;
+  indPizzaData: Indpizza;
 
   constructor(private http: HttpClient) { }
 
@@ -43,5 +45,9 @@ export class OrderService {
 
   getComboList() {
     return this.http.get(environment.apiURL + '/Comboes').toPromise();
+  }
+
+  getSelectedPizza(pizzaID) {
+    return this.http.get(environment.apiURL + '/Pizzas/' + pizzaID).toPromise();
   }
 }
