@@ -14,6 +14,11 @@ export class PizzaorderComponent implements OnInit {
   baseList: Base[];
   sizeList: Size[];
   indPizzaList: Indpizza[];
+  isValid: Boolean = true;
+  x: number;
+  y: number;
+  a: number;
+  b: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -22,7 +27,7 @@ export class PizzaorderComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.oService.getSelectedPizza(this.data.Pizze_ID).then(res => this.indPizzaList = res as Indpizza[]);
+    // this.oService.getSelectedPizza(this.oService.pizzaIndex).then(res => this.indPizzaList = res as Indpizza[]);
     this.oService.getBaseList().then(res => this.baseList = res as Base[]);
     this.oService.getSizeList().then(res => this.sizeList = res as Size[]);
 
@@ -45,6 +50,54 @@ export class PizzaorderComponent implements OnInit {
       Pizza_Name: '',
       Pizza_Desc: ''
     };
+
+    this.oService.finalPizzaPrice = this.oService.pizzaPrice;
+    this.x = 0;
+    this.y = 0;
+    this.a = 0;
+    this.b = 0;
   }
 
+  AddBase(ctrl) {
+    if (ctrl.selectedIndex === 0) {
+      this.oService.baseData.Price = 0;
+    } else {
+      this.oService.baseData.Price = this.baseList[ctrl.selectedIndex - 1].Price;
+      this.y = this.oService.baseData.Price;
+      this.oService.finalPizzaPrice = this.oService.finalPizzaPrice - this.x + this.y;
+      this.x = this.y;
+    }
+  }
+
+  AddSize(ctrl) {
+    if (ctrl.selectedIndex === 0) {
+      this.oService.sizeData.Price = 0;
+    } else {
+      this.oService.sizeData.Price = this.sizeList[ctrl.selectedIndex - 1].Price;
+      this.b = this.oService.sizeData.Price;
+      this.oService.finalPizzaPrice = this.oService.finalPizzaPrice - this.a + this.b;
+      this.a = this.b;
+    }
+  }
+
+  AddPizzaOrder() {
+    if (this.validateForm(this.oService.baseData, this.oService.sizeData)) {
+      this.oService.finalPrice = this.oService.finalPrice + this.oService.finalPizzaPrice;
+      this.dialogRef.close();
+      this.oService.finalPizzaPrice = 0;
+      console.log(this.oService.finalPrice, this.oService.finalPizzaPrice);
+    }
+  }
+
+  validateForm(baseData: Base, sizeData: Size) {
+    this.isValid = true;
+    if (baseData.Base_ID === 0) {
+      this.isValid = false;
+    } else if (sizeData.Size_ID === 0) {
+      this.isValid = false;
+    }
+    // this.epObj.Exercise_Plan_ID = this.service.formData.Exercise_Plan_ID;
+    // this.epObj.Exercise_Plan_Name = this.service.formData.Exercise_Plan_Name;
+    return this.isValid;
+  }
 }

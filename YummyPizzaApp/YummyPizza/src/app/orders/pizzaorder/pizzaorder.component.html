@@ -1,1 +1,64 @@
-<p>pizzaorder works!</p>
+    <!-- <div class="col-md-12">
+        <table class="table table-boarderless text-center">
+            <tr *ngFor="let item of indPizzaList;">
+                <th>{{ item.Pizza_Name }}</th>
+            </tr>
+        </table>
+    </div> 
+<div class="col-md-6 offset-md-4">
+        <input name="PizzaName" #PizzaName="ngModel" [(ngModel)]="oService.pizzaName" readonly>
+    </div>-->
+    
+    <h1 class="pizzaName">{{ oService.pizzaName }}</h1>
+
+    <br>
+
+    <div class="col-md-6 offset-md-3">
+        <div class="form-group">
+            <label class="lbl">Select Pizza Base</label>
+            <select name="BaseID" #BaseID="ngModel" [(ngModel)]="oService.baseData.Base_ID" class="form-control" (change)="AddBase($event.target)"
+            [class.is-invalid]="!isValid && oService.baseData.Base_ID==0">
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of baseList" value="{{item.Base_ID}}">{{item.Base_Type}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-6 offset-md-3">
+        <div class="form-group">
+            <label class="lbl">Select Pizza Size</label>
+            <select name="SizeID" #SizeID="ngModel" [(ngModel)]="oService.sizeData.Size_ID" class="form-control" (change)="AddSize($event.target)"
+            [class.is-invalid]="!isValid && oService.sizeData.Size_ID==0">
+              <option value="0">-Select-</option>
+              <option *ngFor="let item of sizeList" value="{{item.Size_ID}}">{{item.Size_Desc}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-6 offset-md-3">
+        <div class="form-group">
+            <label class="text-center lbl" id="epp">Price</label>                
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div id="deppi" class="input-group-text">R</div>
+                </div>
+                <input id="eppi" name="finalPizzaPrice" #finalPizzaPrice="ngModel" [(ngModel)]="oService.finalPizzaPrice" class="form-control" readonly>
+            </div>
+        </div>
+    </div>
+  
+
+  <div class="form-group">
+    <button class="btn btn-sm btn-primary text-white" 
+            (click)="AddPizzaOrder()">
+            <i class="fa fa-plus"></i> Add Pizza
+    </button>
+  </div>
+  <div class="form-group">
+    <!-- <button type="submit" class="btn btn-dark" [disabled]="currentWorkouts == 0"><i class="fa fa-database"></i> Save Day</button> -->
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close" ></i> Close</button>
+  </div>
+
+<!-- <input type="hidden"  name="PizzaID" #PizzaID="ngModel" [(ngModel)]="oService.indPizzaData.Pizza_ID">
+  <input type="hidden"  name="PizzaID" #PizzaID="ngModel" [(ngModel)]="oService.indPizzaData.Pizza_ID">
+  <input type="hidden"  name="PizzaID" #PizzaID="ngModel" [(ngModel)]="oService.indPizzaData.Pizza_ID"> -->

@@ -20,6 +20,11 @@ export class OrderService {
   toppingData: Topping;
   comboData: Combo;
   indPizzaData: Indpizza;
+  finalPrice: number;
+  pizzaIndex: number;
+  pizzaName: string;
+  pizzaPrice: number;
+  finalPizzaPrice: number;
 
   constructor(private http: HttpClient) { }
 

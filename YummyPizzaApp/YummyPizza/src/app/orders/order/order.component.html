@@ -11,39 +11,29 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngIf="pizzaList.length==0">
-            <td class="font-italic text-center" colspan="5">
-            No Available Pizzas.
-            </td>
-        </tr> 
-        <tr *ngFor="let item of pizzaList">
+        <tr *ngFor="let item of pizzaList; let i=index">
             <td>{{ item.Pizza_Name }}</td>
             <td>{{ item.Pizza_Desc }}</td>
             <td>R{{ item.Price }}</td>
             <td>
-                <a (click)="CreatePizzaOrder(Orderservice.pizzaData.Pizza_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+                <a (click)="CreatePizzaOrder(i)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <!-- Base Table -->
-    <table class="table table-boarderless" id="tbase">
+    <!-- Topping Table -->
+    <table class="table table-boarderless" id="ttopping">
         <thead class="thead-light">
             <tr>
-                <th>Base</th>
+                <th>Topping</th>
                 <th>Price</th>
                 <th></th>
             </tr>
         </thead>
       <tbody>
-        <tr *ngIf="baseList.length==0">
-            <td class="font-italic text-center" colspan="5">
-            No Available Bases.
-            </td>
-        </tr> 
-        <tr *ngFor="let item of baseList">
-            <td>{{ item.Base_Type }}</td>
+        <tr *ngFor="let item of toppingList">
+            <td>{{ item.Topping_Name }}</td>
             <td>R{{ item.Price }}</td>
             <td>
                 <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
@@ -62,63 +52,8 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngIf="extraList.length==0">
-            <td class="font-italic text-center" colspan="5">
-            No Available Extras.
-            </td>
-        </tr> 
         <tr *ngFor="let item of extraList">
             <td>{{ item.Extra_Name }}</td>
-            <td>R{{ item.Price }}</td>
-            <td>
-                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- Size Table -->
-    <table class="table table-boarderless" id="tsize">
-        <thead class="thead-light">
-            <tr>
-                <th>Size</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-      <tbody>
-        <tr *ngIf="sizeList.length==0">
-            <td class="font-italic text-center" colspan="5">
-            No Available Sizes for Pizzas.
-            </td>
-        </tr> 
-        <tr *ngFor="let item of sizeList">
-            <td>{{ item.Size_Desc }}</td>
-            <td>R{{ item.Price }}</td>
-            <td>
-                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- Topping Table -->
-    <table class="table table-boarderless" id="ttopping">
-        <thead class="thead-light">
-            <tr>
-                <th>Topping</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-      <tbody>
-        <tr *ngIf="toppingList.length==0">
-            <td class="font-italic text-center" colspan="5">
-            No Available Toppings.
-            </td>
-        </tr> 
-        <tr *ngFor="let item of toppingList">
-            <td>{{ item.Topping_Name }}</td>
             <td>R{{ item.Price }}</td>
             <td>
                 <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
@@ -141,11 +76,11 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngIf="comboList.length==0">
+        <!-- <tr *ngIf="comboList.length==0">
             <td class="font-italic text-center" colspan="5">
             No Available Comboes.
             </td>
-        </tr> 
+        </tr>  -->
         <tr *ngFor="let item of comboList">
             <td>{{ item.Combo_Name }}</td>
             <td>R{{ item.Combo_Price }}</td>
@@ -161,6 +96,55 @@
     </table>
 </form>
 
+<!-- Base Table 
+    <table class="table table-boarderless" id="tbase">
+        <thead class="thead-light">
+            <tr>
+                <th>Base</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+      <tbody>
+        <tr *ngIf="baseList.length==0">
+            <td class="font-italic text-center" colspan="5">
+            No Available Bases.
+            </td>
+        </tr> 
+        <tr *ngFor="let item of baseList">
+            <td>{{ item.Base_Type }}</td>
+            <td>R{{ item.Price }}</td>
+            <td>
+                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table> -->
+
+    <!-- Size Table 
+    <table class="table table-boarderless" id="tsize">
+        <thead class="thead-light">
+            <tr>
+                <th>Size</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+      <tbody>
+        <tr *ngIf="sizeList.length==0">
+            <td class="font-italic text-center" colspan="5">
+            No Available Sizes for Pizzas.
+            </td>
+        </tr> 
+        <tr *ngFor="let item of sizeList">
+            <td>{{ item.Size_Desc }}</td>
+            <td>R{{ item.Price }}</td>
+            <td>
+                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table> -->
 
 
 
@@ -254,35 +238,3 @@
 </form>
 
 -->
-
-  <!--h1>Available Products</h1>
-    [class.text-danger]="!isValid && service.exerciseplanday.length==0"
-
--->
-    <!-- <input type="text" class="hidden" name = "Pizza_Name" #Pizza_Name="ngModel" [(ngModel)]="service.pizzaList.Pizza_Name">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="formgroup">
-                <label>Flavour</label>
-                <div class="input-group">
-                    <input name = "Pizza_Desc" #Pizza_Desc="ngModel" [(ngModel)]="service.pizzaList.Pizza_Desc" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="formgroup">
-                <label>Price</label>
-                <div class="input-group">
-                    <input name = "Price_ID" #Price_ID="ngModel" [(ngModel)]="service.pizzaList.Price_ID" class="form-control">
-                </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="formgroup">
-                    <label>Price</label>
-                    <div class="input-group">
-                        <input name = "Price_ID" #Price_ID="ngModel" [(ngModel)]="service.pizzaList.Price_ID" class="form-control">
-                    </div>
-                    </div>
-                </div>
-        </div>-->

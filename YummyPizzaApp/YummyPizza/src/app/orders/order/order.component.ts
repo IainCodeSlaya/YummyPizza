@@ -93,15 +93,24 @@ export class OrderComponent implements OnInit {
       Extra_ID: 0,
       Extra_Name: ''
     };
+
+    this.Orderservice.finalPrice = 0;
+    this.Orderservice.pizzaIndex = 0;
+    this.Orderservice.pizzaName = '';
+    this.Orderservice.pizzaPrice = 0;
+    this.Orderservice.finalPizzaPrice = 0;
     // this.o.exerciseplanday = [];
   }
 
-  CreatePizzaOrder(Pizza_ID) {
+  CreatePizzaOrder(i) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = "50%";
-    dialogConfig.data = { Pizza_ID };
+    dialogConfig.data = { i };
+    this.Orderservice.pizzaIndex = i;
+    this.Orderservice.pizzaName = this.pizzaList[this.Orderservice.pizzaIndex].Pizza_Name;
+    this.Orderservice.pizzaPrice = this.pizzaList[this.Orderservice.pizzaIndex].Price;
     this.dialog.open(PizzaorderComponent, dialogConfig);
   }
 }
