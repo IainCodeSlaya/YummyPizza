@@ -80,9 +80,10 @@ export class PizzaorderComponent implements OnInit {
     }
   }
 
-  AddPizzaOrder() {
+  AddPizzaItem() {
     if (this.validateForm(this.oService.baseData, this.oService.sizeData)) {
       this.oService.finalPrice = this.oService.finalPrice + this.oService.finalPizzaPrice;
+
       this.dialogRef.close();
       this.oService.finalPizzaPrice = 0;
       console.log(this.oService.finalPrice, this.oService.finalPizzaPrice);

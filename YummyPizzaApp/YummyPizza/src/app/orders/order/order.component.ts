@@ -9,6 +9,10 @@ import { Topping } from 'src/app/shared/topping.model';
 import { Combo } from 'src/app/shared/combo.model';
 import { PizzaorderComponent } from '../pizzaorder/pizzaorder.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { Ordertype } from 'src/app/shared/ordertype.model';
+import { Orderstatus } from 'src/app/shared/orderstatus.model';
+import { Orderitem } from 'src/app/shared/orderitem.model';
+import { SelectquantityComponent } from '../selectquantity/selectquantity.component';
 
 @Component({
   selector: 'app-order',
@@ -22,6 +26,9 @@ export class OrderComponent implements OnInit {
   sizeList: Size[];
   toppingList: Topping[];
   comboList: Combo[];
+  odTypeList: Ordertype[];
+  odStatusList: Orderstatus[];
+  orderItemData: Orderitem;
 
   constructor(
     private Orderservice: OrderService,
@@ -29,6 +36,8 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.Orderservice.getOrderStasusList().then(res => this.odStatusList = res as Orderstatus[]);
+    this.Orderservice.getOrderTypeList().then(res => this.odTypeList = res as Ordertype[]);
     this.Orderservice.getBaseList().then(res => this.baseList = res as Base[]);
     this.Orderservice.getExtraList().then(res => this.extraList = res as Extra[]);
     this.Orderservice.getPizzaList().then(res => this.pizzaList = res as Pizza[]);
@@ -94,12 +103,78 @@ export class OrderComponent implements OnInit {
       Extra_Name: ''
     };
 
+    this.Orderservice.orderData = {
+      Order_ID: null,
+      Order_No: Math.floor(100000 + Math.random() * 900000),
+      Order_Status_ID: 4,
+      Status: 'Started',
+      Order_Type_ID: 0,
+      Order_Type: '',
+      Order_Date: this.getDate(),
+      OTotal: 0,
+      Emp_Shift_ID: 1,
+      User_ID: 1
+    };
+
     this.Orderservice.finalPrice = 0;
     this.Orderservice.pizzaIndex = 0;
     this.Orderservice.pizzaName = '';
     this.Orderservice.pizzaPrice = 0;
     this.Orderservice.finalPizzaPrice = 0;
-    // this.o.exerciseplanday = [];
+    this.Orderservice.orderItemsList = [];
+    this.resetItem();
+  }
+
+  resetItem() {
+    this.orderItemData = {
+      OrderItem_ID: null,
+      Order_ID: null,
+      Topping_ID: null,
+      Pizza_ID: null,
+      Size_ID: null,
+      Base_ID: null,
+      Extra_ID: null,
+      Combo_ID: null,
+      Order_Quantity: 0
+    };
+  }
+
+  getDate() {
+    var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+    return(utc);
+  }
+
+  selectOrderType(ctrl) {
+    if (ctrl.selectedIndex === 0) {
+      this.Orderservice.orderData.Order_Type = '';
+    } else {
+      this.Orderservice.orderData.Order_Type = this.odTypeList[ctrl.selectedIndex - 1].Order_Type1;
+    }
+    console.log(this.Orderservice.orderData);
+  }
+
+  AddToppingToOrder(j, OrderID) {
+    this.resetItem();
+    this.orderItemData.Order_ID = OrderID;
+    this.orderItemData.Topping_ID = this.toppingList[j - 1].Topping_ID;
+    this.Orderservice.orderItemsList.push(this.orderItemData);
+  }
+
+  AddExtraToOrder(k, OrderID) {
+    this.resetItem();
+    console.log(k, OrderID);
+    this.orderItemData.Order_ID = OrderID;
+    this.orderItemData.Extra_ID = this.extraList[k + 1].Extra_ID;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "30%";
+    dialogConfig.data = { k };
+    this.dialog.open(SelectquantityComponent, dialogConfig);
+    // var tenure = prompt('Please enter preferred tenure in years', '');
+    // document.getElementById("msg").innerHTML = "You have entered " + tenure + " years";
+    this.Orderservice.orderItemsList.push(this.orderItemData);
   }
 
   CreatePizzaOrder(i) {

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -13,6 +14,7 @@ import { OrderComponent } from './orders/order/order.component';
 import { Pizza } from './shared/pizza.model';
 import { OrderService } from './shared/order.service';
 import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
+import { SelectquantityComponent } from './orders/selectquantity/selectquantity.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
     OrderComponent,
     OrdersComponent,
     OrderItemsComponent,
-    PizzaorderComponent
+    PizzaorderComponent,
+    SelectquantityComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +31,10 @@ import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule
   ],
-  entryComponents: [PizzaorderComponent],
+  entryComponents: [PizzaorderComponent, SelectquantityComponent],
   providers: [OrderService ],
   bootstrap: [AppComponent]
 })

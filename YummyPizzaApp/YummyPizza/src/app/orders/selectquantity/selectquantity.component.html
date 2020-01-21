@@ -1,0 +1,12 @@
+<div class="lbl">
+    <h3 class="pizzaName">Please select quantity for order</h3>
+    <br>
+    <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <mat-select (change)="updateQuantity(item.value)">
+          <mat-option *ngFor="let item of numbers" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>

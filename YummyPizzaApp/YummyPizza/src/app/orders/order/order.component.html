@@ -1,5 +1,80 @@
 <form #form="ngForm" autocomplete="off" *ngIf="Orderservice.pizzaData" (submit)="onSubmit(form)">
 
+    <div class="flex">
+        <h1>Begin New Order</h1>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label id="onumberl">Order Number:</label>                
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div id="onumberad" class="input-group-text">#</div>
+                    </div>
+                    <input id="onumberi" name="OrderNo" #OrderNo="ngModel" [(ngModel)]="Orderservice.orderData.Order_No" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="text-center lbl" id="ostatusl">Order Status</label>                
+                <div class="input-group">
+                    <input id="ostatusi" name="orderStatus" #orderStatus="ngModel" [(ngModel)]="Orderservice.orderData.Status" 
+                        class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="form-group">
+                <label id="otypel">Order Type</label>
+                <select id="sotype" name="OrderTypeID" #OrderTypeID="ngModel" 
+                        [(ngModel)]="Orderservice.orderData.Order_Type_ID" class="form-control"
+                        (change)="selectOrderType($event.target)" [class.is-invalid]="!isValid && Orderservice.orderData.Order_Type_ID==0">
+                    <option value="0">-- Select --</option>
+                    <option *ngFor="let item of odTypeList" value="{{item.Order_Type_ID}}">{{item.Order_Type1}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="text-center lbl" id="odatel">Order Date</label>                
+                <div class="input-group">
+                    <input id="odatei" name="OrderDate" #OrderDate="ngModel" [(ngModel)]="Orderservice.orderData.Order_Date" 
+                        class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="form-group">
+                <label id="ototall">Order Total:</label>                
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div id="ototalad" class="input-group-text">R</div>
+                    </div>
+                    <input id="ototali" name="OTotal" #OTotal="ngModel" [(ngModel)]="Orderservice.orderData.OTotal" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group flex">
+        <button type="button" class="btn btn-outline-dark ml-1 btn-lg" (click)="startNewOrder()"><i class="fa fa-pencil" ></i> Begin Order</button>
+    </div>
+    <br>
+    <hr>
+    
+
     <!-- Pizza Table -->
     <table class="table table-boarderless" id="tpizza">
         <thead class="thead-light">
@@ -11,7 +86,7 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngFor="let item of pizzaList; let i=index">
+        <tr *ngFor="let item of pizzaList; let i=index;">
             <td>{{ item.Pizza_Name }}</td>
             <td>{{ item.Pizza_Desc }}</td>
             <td>R{{ item.Price }}</td>
@@ -32,11 +107,11 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngFor="let item of toppingList">
+        <tr *ngFor="let item of toppingList; let j=index;">
             <td>{{ item.Topping_Name }}</td>
             <td>R{{ item.Price }}</td>
             <td>
-                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+                <a (click)="AddToppingToOrder(j, Orderservice.orderData.Order_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
             </td>
         </tr>
         </tbody>
@@ -52,11 +127,11 @@
             </tr>
         </thead>
       <tbody>
-        <tr *ngFor="let item of extraList">
+        <tr *ngFor="let item of extraList; let k=index;">
             <td>{{ item.Extra_Name }}</td>
             <td>R{{ item.Price }}</td>
             <td>
-                <a (click)="AddToOrder()" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+                <a (click)="AddExtraToOrder(k, Orderservice.orderData.Order_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
             </td>
         </tr>
         </tbody>
@@ -81,7 +156,7 @@
             No Available Comboes.
             </td>
         </tr>  -->
-        <tr *ngFor="let item of comboList">
+        <tr *ngFor="let item of comboList; let l=index;">
             <td>{{ item.Combo_Name }}</td>
             <td>R{{ item.Combo_Price }}</td>
             <td>{{ item.Pizza_Name }}</td>
