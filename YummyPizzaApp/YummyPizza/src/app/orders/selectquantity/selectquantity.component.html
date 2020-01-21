@@ -1,12 +1,22 @@
 <div class="lbl">
     <h3 class="pizzaName">Please select quantity for order</h3>
     <br>
-    <mat-form-field>
-        <mat-label>Quantity</mat-label>
-        <mat-select (change)="updateQuantity(item.value)">
-          <mat-option *ngFor="let item of numbers" [value]="item.value">
-            {{item.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <select id="qtys" class="form-control" (change)="updateQuantity()"
+            [class.is-invalid]="!isValid && oService.quantity==0">
+        <option value="0">-- Select --</option>
+        <option *ngFor="let item of numbers" value="{{item.value}}">{{item.viewValue}}</option>
+    </select>
+</div>
+
+<br>
+
+<div class="form-group lbl">
+  <button class="btn btn-sm btn-primary text-white" (click)="saveQuantity()">
+          <i class="fa fa-magic"></i> Save Quantity
+  </button>
+</div>
+<div class="form-group lbl">
+  <button type="button" class="btn btn-outline-dark ml-1" 
+          [mat-dialog-close]><i class="fa fa-close" ></i> Close
+  </button>
 </div>

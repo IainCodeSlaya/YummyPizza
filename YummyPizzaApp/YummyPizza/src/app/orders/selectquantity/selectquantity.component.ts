@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from 'src/app/shared/order.service';
 
 export interface Quantity {
   value: number;
@@ -24,13 +25,32 @@ export class SelectquantityComponent implements OnInit {
     {value: 10, viewValue: '10'}
   ];
 
-  constructor() { }
+  isValid: Boolean = true;
+
+  constructor( private oService: OrderService ) { }
 
   ngOnInit() {
+    this.oService.quantity = 0;
   }
 
-  updateQuantity(qty: number) {
-    console.log(qty);
+  updateQuantity() {
+    const ola = (document.getElementById('qtys') as HTMLSelectElement).selectedIndex;
+    this.oService.quantity = this.numbers[ola].value;
+  }
+
+  saveQuantity() {
+    const ola = (document.getElementById('qtys') as HTMLSelectElement).selectedIndex;
+    this.validateForm(ola);
+  }
+
+  validateForm(ola: number) {
+    this.isValid = true;
+    if (ola === 0) {
+      this.isValid = false;
+    } else if ( this.oService.quantity === 0) {
+      this.isValid = false;
+    }
+    return this.isValid;
   }
 
 }

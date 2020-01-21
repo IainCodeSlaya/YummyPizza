@@ -33,6 +33,7 @@ export class OrderService {
   orderstatusData: Orderstatus;
   ordertypeData: Ordertype;
   orderItemsList: Orderitem[];
+  quantity: number;
 
   constructor(private http: HttpClient) { }
 

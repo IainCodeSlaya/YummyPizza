@@ -169,7 +169,7 @@ export class OrderComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width = "30%";
+    dialogConfig.width = "40%";
     dialogConfig.data = { k };
     this.dialog.open(SelectquantityComponent, dialogConfig);
     // var tenure = prompt('Please enter preferred tenure in years', '');
