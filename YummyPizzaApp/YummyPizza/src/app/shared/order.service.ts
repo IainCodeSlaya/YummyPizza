@@ -33,9 +33,19 @@ export class OrderService {
   orderstatusData: Orderstatus;
   ordertypeData: Ordertype;
   orderItemsList: Orderitem[];
+  orderItemData: Orderitem;
   quantity: number;
+  qtyPrice: number;
 
   constructor(private http: HttpClient) { }
+
+  saveOrUpdateOrder() {
+    var body = {
+      ...this.orderData,
+      OrderItems: this.orderItemsList
+    };
+    return this.http.post(environment.apiURL + '/Orders', body);
+  }
 
   getOrderStasusList() {
     return this.http.get(environment.apiURL + '/OrderStatus').toPromise();

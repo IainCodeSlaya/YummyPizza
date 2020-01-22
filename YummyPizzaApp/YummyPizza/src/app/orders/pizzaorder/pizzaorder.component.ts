@@ -56,6 +56,7 @@ export class PizzaorderComponent implements OnInit {
     this.y = 0;
     this.a = 0;
     this.b = 0;
+    // this.resetItem();
   }
 
   AddBase(ctrl) {
@@ -83,11 +84,27 @@ export class PizzaorderComponent implements OnInit {
   AddPizzaItem() {
     if (this.validateForm(this.oService.baseData, this.oService.sizeData)) {
       this.oService.finalPrice = this.oService.finalPrice + this.oService.finalPizzaPrice;
-
+      this.oService.orderData.OTotal = this.oService.orderData.OTotal + this.oService.finalPrice;
+      this.oService.orderItemsList.push(this.oService.orderItemData);
       this.dialogRef.close();
-      this.oService.finalPizzaPrice = 0;
       console.log(this.oService.finalPrice, this.oService.finalPizzaPrice);
+      this.oService.finalPizzaPrice = 0;
+      this.oService.finalPrice = 0;
     }
+  }
+
+  resetItem() {
+    this.oService.orderItemData = {
+      OrderItem_ID: null,
+      Order_ID: null,
+      Topping_ID: null,
+      Pizza_ID: null,
+      Size_ID: null,
+      Base_ID: null,
+      Extra_ID: null,
+      Combo_ID: null,
+      Order_Quantity: 0
+    };
   }
 
   validateForm(baseData: Base, sizeData: Size) {

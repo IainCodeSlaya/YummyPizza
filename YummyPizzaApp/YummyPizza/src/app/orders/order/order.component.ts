@@ -11,8 +11,8 @@ import { PizzaorderComponent } from '../pizzaorder/pizzaorder.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Ordertype } from 'src/app/shared/ordertype.model';
 import { Orderstatus } from 'src/app/shared/orderstatus.model';
-import { Orderitem } from 'src/app/shared/orderitem.model';
 import { SelectquantityComponent } from '../selectquantity/selectquantity.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-order',
@@ -28,7 +28,8 @@ export class OrderComponent implements OnInit {
   comboList: Combo[];
   odTypeList: Ordertype[];
   odStatusList: Orderstatus[];
-  orderItemData: Orderitem;
+  quantityType: string;
+  isValid: Boolean = true;
 
   constructor(
     private Orderservice: OrderService,
@@ -121,12 +122,14 @@ export class OrderComponent implements OnInit {
     this.Orderservice.pizzaName = '';
     this.Orderservice.pizzaPrice = 0;
     this.Orderservice.finalPizzaPrice = 0;
+    this.quantityType = '';
+    this.Orderservice.qtyPrice = 0;
     this.Orderservice.orderItemsList = [];
     this.resetItem();
   }
 
   resetItem() {
-    this.orderItemData = {
+    this.Orderservice.orderItemData = {
       OrderItem_ID: null,
       Order_ID: null,
       Topping_ID: null,
@@ -155,37 +158,87 @@ export class OrderComponent implements OnInit {
 
   AddToppingToOrder(j, OrderID) {
     this.resetItem();
-    this.orderItemData.Order_ID = OrderID;
-    this.orderItemData.Topping_ID = this.toppingList[j - 1].Topping_ID;
-    this.Orderservice.orderItemsList.push(this.orderItemData);
+    this.Orderservice.orderItemData.Order_ID = OrderID;
+    this.Orderservice.orderItemData.Topping_ID = this.toppingList[j].Topping_ID;
+    this.updatePrice(this.toppingList[j].Price);
+    this.Orderservice.orderItemData.Order_Quantity = 1;
+    this.Orderservice.orderItemsList.push(this.Orderservice.orderItemData);
+    console.log('oItem', this.Orderservice.orderItemData);
+    console.log('orderdata', this.Orderservice.orderData);
   }
 
   AddExtraToOrder(k, OrderID) {
     this.resetItem();
     console.log(k, OrderID);
-    this.orderItemData.Order_ID = OrderID;
-    this.orderItemData.Extra_ID = this.extraList[k + 1].Extra_ID;
+
+    this.Orderservice.orderItemData.Order_ID = OrderID;
+    this.Orderservice.orderItemData.Extra_ID = this.extraList[k].Extra_ID;
+    this.quantityType = 'Extra';
+    let qt = this.quantityType;
+    this.Orderservice.qtyPrice = this.extraList[k].Price;
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = "40%";
-    dialogConfig.data = { k };
+    dialogConfig.data = { k, qt };
     this.dialog.open(SelectquantityComponent, dialogConfig);
-    // var tenure = prompt('Please enter preferred tenure in years', '');
-    // document.getElementById("msg").innerHTML = "You have entered " + tenure + " years";
-    this.Orderservice.orderItemsList.push(this.orderItemData);
+  }
+
+  AddComboToOrder(l, OrderID) {
+    this.resetItem();
+    console.log(l, OrderID);
+
+    this.Orderservice.orderItemData.Order_ID = OrderID;
+    this.Orderservice.orderItemData.Combo_ID = this.comboList[l].Combo_ID;
+    this.quantityType = 'Combo';
+    let qt = this.quantityType;
+    this.Orderservice.qtyPrice = this.comboList[l].Combo_Price;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "40%";
+    dialogConfig.data = { l, qt };
+    this.dialog.open(SelectquantityComponent, dialogConfig);
   }
 
   CreatePizzaOrder(i) {
+    this.resetItem();
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = "50%";
     dialogConfig.data = { i };
+
     this.Orderservice.pizzaIndex = i;
     this.Orderservice.pizzaName = this.pizzaList[this.Orderservice.pizzaIndex].Pizza_Name;
     this.Orderservice.pizzaPrice = this.pizzaList[this.Orderservice.pizzaIndex].Price;
+    this.Orderservice.orderItemData.Pizza_ID = this.pizzaList[i].Pizza_ID;
+    this.Orderservice.orderItemData.Order_Quantity = 1;
+
     this.dialog.open(PizzaorderComponent, dialogConfig);
+  }
+
+  updatePrice(x: number) {
+    this.Orderservice.orderData.OTotal = this.Orderservice.orderData.OTotal + x;
+    console.log(this.Orderservice.orderData.OTotal);
+  }
+
+  startNewOrder() {
+    if (this.validateForm()) {
+      this.Orderservice.saveOrUpdateOrder().subscribe(res => {
+        this.resetForm();
+      });
+    }
+  }
+
+  validateForm() {
+    this.isValid = true;
+    if (this.Orderservice.orderData.Order_Type_ID === 0) {
+      this.isValid = false;
+    }
+    return this.isValid;
   }
 }

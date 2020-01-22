@@ -74,15 +74,34 @@ namespace YummyPizzaAPI.Controllers
         [ResponseType(typeof(Order))]
         public IHttpActionResult PostOrder(Order order)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                //exercise plan table
+                db.Orders.Add(order);
+
+                //exercise plan day tavle
+                foreach (var item in order.OrderItems)
+                {
+                    db.OrderItems.Add(item);
+                }
+                db.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            db.Orders.Add(order);
-            db.SaveChanges();
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
-            return CreatedAtRoute("DefaultApi", new { id = order.Order_ID }, order);
+            //db.Orders.Add(order);
+            //db.SaveChanges();
+
+            //return CreatedAtRoute("DefaultApi", new { id = order.Order_ID }, order);
         }
 
         // DELETE: api/Orders/5
