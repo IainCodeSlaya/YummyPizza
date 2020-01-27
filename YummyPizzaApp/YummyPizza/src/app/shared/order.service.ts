@@ -43,6 +43,7 @@ export class OrderService {
   pmethodData: Pmethod;
   invoiceData: Invoice;
   orderID: number;
+  cancelled: boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -100,5 +101,13 @@ export class OrderService {
 
   getInvoicesList() {
     return this.http.get(environment.apiURL + '/Invoices').toPromise();
+  }
+
+  saveInvoice(body: Invoice) {
+    return this.http.post(environment.apiURL + '/Invoices', body);
+  }
+
+  deleteOrder(id: number) {
+    return this.http.delete(environment.apiURL + '/Orders/' + id).toPromise();
   }
 }

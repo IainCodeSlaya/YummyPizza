@@ -3,6 +3,8 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 import { OrderService } from 'src/app/shared/order.service';
 import { Vat } from 'src/app/shared/vat.model';
 import { Pmethod } from 'src/app/shared/pmethod.model';
+import { ToastrService } from 'ngx-toastr';
+import { OrderComponent } from '../order/order.component';
 
 @Component({
   selector: 'app-invoices',
@@ -13,30 +15,30 @@ export class InvoicesComponent implements OnInit {
   vatList: Vat[];
   pmethodList: Pmethod[];
   isValid: Boolean = true;
+  ordcomp: OrderComponent;
+  change: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<InvoicesComponent>,
     private oService: OrderService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.oService.getVATList().then(res => {
       this.vatList = res as Vat[];
-      console.log(res, "iain3");
-      console.log(this.vatList);
      });
-    console.log(this.vatList);
     this.oService.getPMethodList().then(res => this.pmethodList = res as Pmethod[]);
 
     this.oService.invoiceData = {
-      Invoice_ID: null,
+      Invoice_ID: 0,
       Subtotal: this.oService.orderData.OTotal,
       Amount_Tendered: 0,
       Change: 0,
       VAT_ID: 0,
       Vat_Percent: 0,
-      Order_ID: this.oService.orderID,
+      Order_ID: 0,
       PMethod_ID: 0,
       PMethod_Descr: '',
       Invoice_Total: 0
@@ -55,10 +57,12 @@ export class InvoicesComponent implements OnInit {
     // this.oService.invoiceData.Vat_Percent = this.vatList[1].Vat_Percent;
     d = 1 + (this.oService.invoiceData.Vat_Percent / 100);
     c = this.oService.orderData.OTotal * d;
+    c = +c.toFixed(2);
     return c;
   }
 
   selectPMethod(ctrl) {
+    console.log(this.oService.orderID);
     if (ctrl.selectedIndex === 0) {
       this.oService.invoiceData.PMethod_Descr = '';
     } else {
@@ -66,6 +70,7 @@ export class InvoicesComponent implements OnInit {
       this.oService.invoiceData.VAT_ID = this.vatList[0].Vat_ID;
       this.oService.invoiceData.Vat_Percent = this.vatList[0].Vat_Percent;
       this.oService.invoiceData.Invoice_Total = this.calculateVAT();
+      this.oService.invoiceData.Order_ID = this.oService.orderID;
 
       this.unhideDiv();
       let ati = document.getElementById('ati') as HTMLInputElement;
@@ -108,16 +113,59 @@ export class InvoicesComponent implements OnInit {
   }
 
   completeOrder() {
+    if (this.oService.invoiceData.PMethod_Descr === 'Cash') {
+      if (this.validateForm()) {
+        if (confirm('Are you sure you want to complete this order?')) {
+          this.saveOrder();
+        }
+      }
+    } else {
+      if (confirm('Are you sure you want to complete this order?')) {
+        this.saveOrder();
+      }
+    }
+  }
 
+  calculateChange(value): void {
+    if (isNaN(value)) {
+      this.toastr.error('Amount Paid must be a number with format: YY.YY', 'Yummy Pizza');
+    } else {
+      this.change = value - this.oService.invoiceData.Invoice_Total;
+      this.change = +this.change.toFixed(2);
+      if (this.change < 0) {
+        // this.toastr.error('Amount Paid is not enough', 'Yummy Pizza');
+      } else {
+        this.oService.invoiceData.Change = this.change;
+      }
+    }
+  }
+
+  saveOrder() {
+    this.oService.saveInvoice(this.oService.invoiceData).subscribe(res => {
+      this.toastr.success('Order Completed Successfully', 'Yummy Pizza');
+      this.dialogRef.close();
+    });
   }
 
   cancelOrder() {
-
+    if (confirm('Are you sure you want to cancel the order?')) {
+      this.oService.deleteOrder(this.oService.orderID).then(res => {
+        this.toastr.warning('Order Cancelled', 'Yummy Pizza');
+        this.dialogRef.close();
+      });
+    }
   }
 
   validateForm() {
     this.isValid = true;
-    if (this.oService.orderData.Order_Type_ID === 0) {
+    if (this.oService.invoiceData.Amount_Tendered === 0) {
+      this.toastr.error('Please enter the amount paid', 'Yummy Pizza');
+      this.isValid = false;
+    } else if (isNaN(this.oService.invoiceData.Amount_Tendered)) {
+      this.toastr.error('Amount Paid must be a number', 'Yummy Pizza');
+      this.isValid = false;
+    } else if (this.change < 0) {
+      this.toastr.error('Amount Paid is not enough', 'Yummy Pizza');
       this.isValid = false;
     }
     return this.isValid;

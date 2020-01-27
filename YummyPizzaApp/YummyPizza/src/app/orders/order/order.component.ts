@@ -50,12 +50,7 @@ export class OrderComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
-    // tslint:disable-next-line: no-conditional-assignment
-    if (form = null) {
-      form.resetForm();
-    }
-
+  resetForm() {
     this.Orderservice.pizzaData = {
       Pizza_ID: 0,
       Pizza_Name: '',
@@ -144,7 +139,24 @@ export class OrderComponent implements OnInit {
     this.quantityType = '';
     this.Orderservice.qtyPrice = 0;
     this.Orderservice.orderItemsList = [];
+    this.Orderservice.orderID = 0;
+    this.Orderservice.quantity = 0;
+    this.Orderservice.cancelled = false;
+
     this.resetItem();
+
+    this.Orderservice.invoiceData = {
+      Invoice_ID: null,
+      Subtotal: 0,
+      Amount_Tendered: 0,
+      Change: 0,
+      VAT_ID: 0,
+      Vat_Percent: 0,
+      Order_ID: 0,
+      PMethod_ID: 0,
+      PMethod_Descr: '',
+      Invoice_Total: 0
+    };
   }
 
   resetItem() {
@@ -249,7 +261,6 @@ export class OrderComponent implements OnInit {
     if (this.validateForm()) {
       this.Orderservice.saveOrUpdateOrder().subscribe(res => {
         this.Orderservice.orderID = res as number;
-        console.log(this.Orderservice.orderID, 'iain');
       });
 
       const dialogConfig = new MatDialogConfig();
@@ -257,7 +268,9 @@ export class OrderComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.width = "70%";
       dialogConfig.data = { };
-      this.dialog.open(InvoicesComponent, dialogConfig);
+      this.dialog.open(InvoicesComponent, dialogConfig).afterClosed().subscribe(res => {
+        this.resetForm();
+      });
     }
   }
 

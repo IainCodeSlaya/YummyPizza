@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off" *ngIf="oService.invoiceData" (submit)="onSubmit(form)">
+<form #form="ngForm" autocomplete="off" *ngIf="oService.invoiceData">
     <div class="wrap">
         <h3 id="h3i" class="h3">Make Payment</h3>
         <br>
@@ -36,7 +36,9 @@
                         <div class="input-group-prepend">
                             <div id="dati" class="input-group-text" hidden>R</div>
                         </div>
-                        <input id="ati" name="AmountTendered" #AmountTendered="ngModel" [(ngModel)]="oService.invoiceData.Amount_Tendered" class="form-control" readonly hidden>
+                        <input id="ati" name="AmountTendered" #AmountTendered="ngModel" 
+                            [(ngModel)]="oService.invoiceData.Amount_Tendered" class="form-control" 
+                            (input)="calculateChange($event.target.value)" readonly hidden>
                     </div>
                 </div>
             </div>

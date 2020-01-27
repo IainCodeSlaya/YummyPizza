@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { InvoicesComponent } from './orders/invoices/invoices.component';
     MatDialogModule,
     HttpClientModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    ToastrModule.forRoot()
   ],
   entryComponents: [PizzaorderComponent, SelectquantityComponent, InvoicesComponent],
   providers: [OrderService ],
