@@ -3,7 +3,7 @@
     <br>
     <select id="qtys" class="form-control" (change)="updateQuantity()"
             [class.is-invalid]="!isValid && oService.quantity==0">
-        <option value="0">-- Select --</option>
+        <option value="0">0</option>
         <option *ngFor="let item of numbers" value="{{item.value}}">{{item.viewValue}}</option>
     </select>
 </div>

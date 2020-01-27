@@ -74,6 +74,7 @@
     <br>
 
     <!-- Order Table -->
+    <h1 class="h flex">Current Orders</h1>
     <table class="table table-borderless">
         <thead class="thead-light" *ngIf="Orderservice.itemList.length>0">
           <th>Item</th>
@@ -87,7 +88,7 @@
         <tbody>
           <tr *ngIf="Orderservice.itemList.length==0" [class.text-danger]="!isValid && Orderservice.itemList.length==0">
             <td class="font-italic text-center" colspan="5">
-              No food item selected for this order please select items below.
+              No food item selected for this order please select items below. <i class="fa fa-level-down"></i>
             </td>
           </tr>
     
@@ -98,7 +99,7 @@
             <td>{{item.Total}}</td>
             <td>
               <!-- <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,service.formData.OrderID)"><i class="fa fa-pencil"></i></a> -->
-              <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemID,i)" style="text-align: center;"><i class="fa fa-trash"></i></a>
+              <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(i)" style="text-align: center;"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
         </tbody>
@@ -107,6 +108,7 @@
       <br>    
 
     <!-- Pizza Table -->
+    <h1 class="h flex">Available Pizzas</h1>
     <table class="table table-boarderless" id="tpizza">
         <thead class="thead-light">
             <tr>
@@ -129,6 +131,7 @@
     </table>
 
     <!-- Extra Table -->
+    <h1 class="h flex">Available Extras</h1>
     <table class="table table-boarderless" id="textra">
         <thead class="thead-light">
             <tr>
@@ -149,6 +152,7 @@
     </table>
 
     <!-- Combo Table -->
+    <h1 class="h flex">Available Comboes</h1>
     <table class="table table-boarderless" id="tcombo">
         <thead class="thead-light">
             <tr>

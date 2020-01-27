@@ -263,6 +263,17 @@ export class OrderComponent implements OnInit {
     // console.log(this.Orderservice.orderData.OTotal);
   }
 
+  onDeleteOrderItem(i: number) {
+    if (i > -1) {
+      // console.log(this.Orderservice.itemList[i].Price);
+      // console.log(this.Orderservice.orderItemsList, 'orderitemlist');
+      // console.log(this.Orderservice.itemList, 'itemlist');
+      this.Orderservice.orderData.OTotal = this.Orderservice.orderData.OTotal - this.Orderservice.itemList[i].Total;
+      this.Orderservice.itemList.splice(i, 1);
+      this.Orderservice.orderItemsList.splice(i, 1);
+    }
+  }
+
   startNewOrder() {
     if (this.validateForm()) {
       this.Orderservice.saveOrUpdateOrder().subscribe(res => {
