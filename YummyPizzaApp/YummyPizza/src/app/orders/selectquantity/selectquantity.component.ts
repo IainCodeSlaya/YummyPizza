@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { OrderService } from 'src/app/shared/order.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ThrowStmt } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Quantity {
   value: number;
@@ -33,7 +34,8 @@ export class SelectquantityComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<SelectquantityComponent>,
     private oService: OrderService,
-    private dialog: MatDialog ) { }
+    private dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.oService.quantity = 0;
@@ -45,23 +47,42 @@ export class SelectquantityComponent implements OnInit {
   }
 
   saveQuantity() {
+    let q: number;
     const ola = (document.getElementById('qtys') as HTMLSelectElement).selectedIndex;
     this.validateForm(ola);
+
     if (this.data.qt === 'Extra') {
       this.oService.orderItemData.Order_Quantity = ola;
     } else if (this.data.qt === 'Combo') {
       this.oService.orderItemData.Order_Quantity = ola;
     }
-    this.oService.orderData.OTotal = this.oService.orderData.OTotal + (ola * this.oService.qtyPrice);
+
+    q = ola * this.oService.qtyPrice;
+    this.oService.orderData.OTotal = this.oService.orderData.OTotal + q;
     this.oService.orderItemsList.push(this.oService.orderItemData);
-    console.log('oItem', this.oService.orderItemData);
-    // console.log('p before', this.oService.qtyPrice);
+
+    this.oService.itemData.Quantity = ola;
+    this.oService.itemData.Total = q;
+    this.oService.itemList.push(this.oService.itemData);
+
     this.oService.qtyPrice = 0;
     this.oService.quantity = 0;
-    console.log('oItem', this.oService.orderItemsList);
+    q = 0;
     this.dialogRef.close();
-    // console.log('p after', this.oService.qtyPrice);
-    console.log('orderdata', this.oService.orderData);
+
+    if (this.data.qt === 'Extra') {
+      if (ola === 1) {
+        this.toastr.success('Extra Successfully Added to Order', 'Yummy Pizza');
+      } else {
+        this.toastr.success(ola.toString() + ' Extras Successfully Added to Order', 'Yummy Pizza');
+      }
+    } else if (this.data.qt === 'Combo') {
+      if (ola === 1) {
+        this.toastr.success('Combo Successfully Added to Order', 'Yummy Pizza');
+      } else {
+        this.toastr.success(ola.toString() + ' Comboes Successfully Added to Order', 'Yummy Pizza');
+      }
+    }
   }
 
   validateForm(ola: number) {
@@ -73,5 +94,4 @@ export class SelectquantityComponent implements OnInit {
     }
     return this.isValid;
   }
-
 }

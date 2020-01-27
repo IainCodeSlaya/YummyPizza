@@ -8,12 +8,12 @@
 <div class="col-md-6 offset-md-4">
         <input name="PizzaName" #PizzaName="ngModel" [(ngModel)]="oService.pizzaName" readonly>
     </div>-->
-    
+<!-- <mat-dialog-content> -->
     <h1 class="pizzaName">{{ oService.pizzaName }}</h1>
 
     <br>
 
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3" id="sbd">
         <div class="form-group">
             <label class="lbl">Select Pizza Base</label>
             <select name="BaseID" #BaseID="ngModel" [(ngModel)]="oService.baseData.Base_ID" class="form-control" (change)="AddBase($event.target)"
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3" id="ssd">
         <div class="form-group">
             <label class="lbl">Select Pizza Size</label>
             <select name="SizeID" #SizeID="ngModel" [(ngModel)]="oService.sizeData.Size_ID" class="form-control" (change)="AddSize($event.target)"
@@ -35,9 +35,9 @@
         </div>
     </div>
 
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3" id="pd">
         <div class="form-group">
-            <label class="text-center lbl" id="epp">Price</label>                
+            <label class="text-center lbl" id="epp">Price of Pizza without toppings</label>                
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div id="deppi" class="input-group-text">R</div>
@@ -48,17 +48,46 @@
     </div>
   
 
-  <div class="form-group lbl">
-    <button class="btn btn-sm btn-primary text-white" 
-            (click)="AddPizzaItem()">
-            <i class="fa fa-plus"></i> Add Pizza
-    </button>
-  </div>
-  <div class="form-group lbl">
-    <button type="button" class="btn btn-outline-dark ml-1" 
+    <br>
+    <div class="form-group lbl">
+        <button class="btn btn-sm btn-primary text-white" 
+                (click)="AddPizzaItem()">
+                <i class="fa fa-plus"></i> Add Pizza
+        </button>
+    </div>
+
+    <div id="h6l" hidden>
+        <h6 class="lbl h">Please Select any Extra Toppings Below <i class="fa fa-level-down"></i></h6>
+        <br>
+    </div>
+    
+
+  <!-- Topping Table -->
+  <table class="table table-boarderless" id="ttopping" hidden>
+    <thead class="thead-light">
+        <tr>
+            <th>Topping</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of toppingList; let j=index;">
+            <td>{{ item.Topping_Name }}</td>
+            <td>R{{ item.Price }}</td>
+            <td>
+                <a (click)="AddToppingToOrder(j, oService.orderData.Order_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+            </td>
+        </tr>
+    </tbody>
+   </table>
+ 
+   <div class="form-group lbl">
+    <button type="button" class="btn btn-sm btn-outline-dark" 
             [mat-dialog-close]><i class="fa fa-close" ></i> Close
     </button>
   </div>
+<!-- </mat-dialog-content> -->
 
 <!-- <input type="hidden"  name="PizzaID" #PizzaID="ngModel" [(ngModel)]="oService.indPizzaData.Pizza_ID">
   <input type="hidden"  name="PizzaID" #PizzaID="ngModel" [(ngModel)]="oService.indPizzaData.Pizza_ID">

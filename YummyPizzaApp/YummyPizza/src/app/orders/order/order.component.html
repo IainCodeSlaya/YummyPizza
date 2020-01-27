@@ -69,11 +69,42 @@
 
     <br>
     <div class="form-group flex">
-        <button type="button" class="btn btn-outline-dark ml-1 btn-lg" (click)="startNewOrder()"><i class="fa fa-pencil" ></i> Make Payment</button>
+        <a class="btn btn-lg btn-success text-white" (click)="startNewOrder()"><i class="fa fa-plus"></i> Make Payment</a>
     </div>
     <br>
-    <hr>
+
+    <!-- Order Table -->
+    <table class="table table-borderless">
+        <thead class="thead-light" *ngIf="Orderservice.itemList.length>0">
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>
+            <!-- <a class="btn btn-sm btn-success text-white" (click)="startNewOrder()"><i class="fa fa-plus"></i> Make Payment</a> -->
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngIf="Orderservice.itemList.length==0" [class.text-danger]="!isValid && Orderservice.itemList.length==0">
+            <td class="font-italic text-center" colspan="5">
+              No food item selected for this order please select items below.
+            </td>
+          </tr>
     
+          <tr *ngFor="let item of Orderservice.itemList;let i=index;">
+            <td>{{item.Item}}</td>
+            <td>{{item.Price}}</td>
+            <td>{{item.Quantity}}</td>
+            <td>{{item.Total}}</td>
+            <td>
+              <!-- <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,service.formData.OrderID)"><i class="fa fa-pencil"></i></a> -->
+              <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemID,i)" style="text-align: center;"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>    
 
     <!-- Pizza Table -->
     <table class="table table-boarderless" id="tpizza">
@@ -92,26 +123,6 @@
             <td>R{{ item.Price }}</td>
             <td>
                 <a (click)="CreatePizzaOrder(i)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- Topping Table -->
-    <table class="table table-boarderless" id="ttopping">
-        <thead class="thead-light">
-            <tr>
-                <th>Topping</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-      <tbody>
-        <tr *ngFor="let item of toppingList; let j=index;">
-            <td>{{ item.Topping_Name }}</td>
-            <td>R{{ item.Price }}</td>
-            <td>
-                <a (click)="AddToppingToOrder(j, Orderservice.orderData.Order_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
             </td>
         </tr>
         </tbody>
@@ -170,3 +181,23 @@
         </tbody>
     </table>
 </form>
+
+<!-- Topping Table
+    <table class="table table-boarderless" id="ttopping">
+        <thead class="thead-light">
+            <tr>
+                <th>Topping</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let item of toppingList; let j=index;">
+            <td>{{ item.Topping_Name }}</td>
+            <td>R{{ item.Price }}</td>
+            <td>
+                <a (click)="AddToppingToOrder(j, Orderservice.orderData.Order_ID)" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table> -->

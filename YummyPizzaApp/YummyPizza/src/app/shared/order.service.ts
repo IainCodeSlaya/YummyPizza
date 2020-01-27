@@ -15,6 +15,7 @@ import { Orderitem } from './orderitem.model';
 import { Vat } from './vat.model';
 import { Pmethod } from './pmethod.model';
 import { Invoice } from './invoice.model';
+import { Item } from './item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class OrderService {
   pizzaIndex: number;
   pizzaName: string;
   pizzaPrice: number;
+  pizzaID: number;
   finalPizzaPrice: number;
   orderData: Order;
   orderstatusData: Orderstatus;
@@ -44,6 +46,8 @@ export class OrderService {
   invoiceData: Invoice;
   orderID: number;
   cancelled: boolean;
+  itemList: Item[];
+  itemData: Item;
 
   constructor(private http: HttpClient) { }
 
