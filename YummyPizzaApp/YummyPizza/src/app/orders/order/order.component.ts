@@ -12,7 +12,8 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Ordertype } from 'src/app/shared/ordertype.model';
 import { Orderstatus } from 'src/app/shared/orderstatus.model';
 import { SelectquantityComponent } from '../selectquantity/selectquantity.component';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Returnorder } from 'src/app/shared/returnorder.model';
+import { InvoicesComponent } from '../invoices/invoices.component';
 
 @Component({
   selector: 'app-order',
@@ -30,6 +31,7 @@ export class OrderComponent implements OnInit {
   odStatusList: Orderstatus[];
   quantityType: string;
   isValid: Boolean = true;
+  rOrder: Returnorder;
 
   constructor(
     private Orderservice: OrderService,
@@ -117,6 +119,23 @@ export class OrderComponent implements OnInit {
       User_ID: 1
     };
 
+    this.rOrder = {
+      Order_ID: 0,
+      Order_No: 0,
+      Order_Status_ID: 0,
+      Order_Type_ID: 0,
+      Order_Date: '',
+      OTotal: 0,
+      Emp_Shift_ID: 0,
+      User_ID: 0,
+      Employee_Shift: null,
+      Invoices: [],
+      Order_Status: null,
+      Order_Type: null,
+      User: null,
+      OrderItems: []
+    };
+
     this.Orderservice.finalPrice = 0;
     this.Orderservice.pizzaIndex = 0;
     this.Orderservice.pizzaName = '';
@@ -163,13 +182,13 @@ export class OrderComponent implements OnInit {
     this.updatePrice(this.toppingList[j].Price);
     this.Orderservice.orderItemData.Order_Quantity = 1;
     this.Orderservice.orderItemsList.push(this.Orderservice.orderItemData);
-    console.log('oItem', this.Orderservice.orderItemData);
-    console.log('orderdata', this.Orderservice.orderData);
+    // console.log('oItem', this.Orderservice.orderItemData);
+    // console.log('orderdata', this.Orderservice.orderData);
   }
 
   AddExtraToOrder(k, OrderID) {
     this.resetItem();
-    console.log(k, OrderID);
+    // console.log(k, OrderID);
 
     this.Orderservice.orderItemData.Order_ID = OrderID;
     this.Orderservice.orderItemData.Extra_ID = this.extraList[k].Extra_ID;
@@ -187,7 +206,7 @@ export class OrderComponent implements OnInit {
 
   AddComboToOrder(l, OrderID) {
     this.resetItem();
-    console.log(l, OrderID);
+    // console.log(l, OrderID);
 
     this.Orderservice.orderItemData.Order_ID = OrderID;
     this.Orderservice.orderItemData.Combo_ID = this.comboList[l].Combo_ID;
@@ -223,14 +242,22 @@ export class OrderComponent implements OnInit {
 
   updatePrice(x: number) {
     this.Orderservice.orderData.OTotal = this.Orderservice.orderData.OTotal + x;
-    console.log(this.Orderservice.orderData.OTotal);
+    // console.log(this.Orderservice.orderData.OTotal);
   }
 
   startNewOrder() {
     if (this.validateForm()) {
       this.Orderservice.saveOrUpdateOrder().subscribe(res => {
-        this.resetForm();
+        this.Orderservice.orderID = res as number;
+        console.log(this.Orderservice.orderID, 'iain');
       });
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.disableClose = true;
+      dialogConfig.width = "70%";
+      dialogConfig.data = { };
+      this.dialog.open(InvoicesComponent, dialogConfig);
     }
   }
 

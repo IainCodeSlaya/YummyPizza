@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using YummyPizzaAPI.Models;
 
@@ -72,6 +73,7 @@ namespace YummyPizzaAPI.Controllers
 
         // POST: api/Orders
         [ResponseType(typeof(Order))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*", exposedHeaders: "*")]
         public IHttpActionResult PostOrder(Order order)
         {
             try
@@ -86,7 +88,7 @@ namespace YummyPizzaAPI.Controllers
                 }
                 db.SaveChanges();
 
-                return Ok();
+                return Ok(order.Order_ID);
             }
             catch (Exception ex)
             {

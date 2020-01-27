@@ -1,0 +1,96 @@
+<form #form="ngForm" autocomplete="off" *ngIf="oService.invoiceData" (submit)="onSubmit(form)">
+    <div class="wrap">
+        <h3 id="h3i" class="h3">Make Payment</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-6 offset-md-0">
+                <div class="form-group">
+                    <label id="il">Sub Total:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div id="deppi" class="input-group-text">R</div>
+                        </div>
+                        <input id="ist" name="Subtotal" #Subtotal="ngModel" [(ngModel)]="oService.invoiceData.Subtotal" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="col-md-6 offset-md-0">
+                <div class="form-group">
+                    <label id="lspm">Select Payment Method</label>
+                    <select id="spm" name="PMethodID" #PMethodID="ngModel" [(ngModel)]="oService.invoiceData.PMethod_ID" class="form-control"
+                            (change)="selectPMethod($event.target)" [class.is-invalid]="!isValid && oService.invoiceData.PMethod_ID==0">
+                        <option value="0">-- Select --</option>
+                        <option *ngFor="let item of pmethodList" value="{{item.PMethod_ID}}">{{item.PMethod_Descr}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-0">
+                <div class="form-group">
+                    <label id="atl" hidden>Amount Paid: </label>                
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div id="dati" class="input-group-text" hidden>R</div>
+                        </div>
+                        <input id="ati" name="AmountTendered" #AmountTendered="ngModel" [(ngModel)]="oService.invoiceData.Amount_Tendered" class="form-control" readonly hidden>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 offset-md-0">
+                <div class="form-group">
+                    <label id="vl" hidden>VAT Percentage: </label>                
+                    <div class="input-group">
+                        <input id="vi" name="VatPercent" #VatPercent="ngModel" [(ngModel)]="oService.invoiceData.Vat_Percent" class="form-control" readonly hidden>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <div class="col-md-6 offset-md-3">
+            <div class="form-group">
+                <label id="cl" hidden>Change: </label>                
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div id="dci" class="input-group-text" hidden>R</div>
+                    </div>
+                    <input id="ci" name="Change" #Change="ngModel" [(ngModel)]="oService.invoiceData.Change" class="form-control" readonly hidden>
+                </div>
+            </div>
+        </div>        
+
+        <div id="totald" class="col-md-6 offset-md-3" hidden>
+            <div class="form-group">
+                <h4 style="font-size: small;">ORDER TOTAL: </h4>
+                <label style="font-weight: bold;" id="totall">{{oService.invoiceData.Invoice_Total}}</label> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="cob" class="col-md-6 offset-md-0" hidden>
+                <button (click)="completeOrder()" class="btn btn-outline-primary ml-1 btn-sm"><i class="fa fa-database"></i> Complete Order</button>
+            </div>
+
+            <div id="cobb" class="col-md-6 offset-md-0">
+                <button (click)="cancelOrder(oService.invoiceData.Order_ID)" class="btn btn-outline-dark ml-1 btn-sm"><i class="fa fa-close"></i> Cancel Order</button>
+            </div>
+        </div>
+    </div>    
+</form>
+
+<!-- <div class="col-md-6 offset-md-3">
+            <div class="form-group">
+                <label id="il">Sub Total:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div id="deppi" class="input-group-text">R</div>
+                    </div>
+                    <input id="ist" name="InvoiceTotal" #InvoiceTotal="ngModel" [(ngModel)]="oService.invoiceData.Invoice_Total" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+-->

@@ -12,6 +12,9 @@ import { Order } from './order.model';
 import { Orderstatus } from './orderstatus.model';
 import { Ordertype } from './ordertype.model';
 import { Orderitem } from './orderitem.model';
+import { Vat } from './vat.model';
+import { Pmethod } from './pmethod.model';
+import { Invoice } from './invoice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +39,10 @@ export class OrderService {
   orderItemData: Orderitem;
   quantity: number;
   qtyPrice: number;
+  vatData: Vat;
+  pmethodData: Pmethod;
+  invoiceData: Invoice;
+  orderID: number;
 
   constructor(private http: HttpClient) { }
 
@@ -79,7 +86,19 @@ export class OrderService {
     return this.http.get(environment.apiURL + '/Comboes').toPromise();
   }
 
-  getSelectedPizza(pizzaID) {
+  getSelectedPizza(pizzaID: number) {
     return this.http.get(environment.apiURL + '/Pizzas/' + pizzaID).toPromise();
+  }
+
+  getVATList() {
+    return this.http.get(environment.apiURL + '/VATs').toPromise();
+  }
+
+  getPMethodList() {
+    return this.http.get(environment.apiURL + '/PMethods').toPromise();
+  }
+
+  getInvoicesList() {
+    return this.http.get(environment.apiURL + '/Invoices').toPromise();
   }
 }

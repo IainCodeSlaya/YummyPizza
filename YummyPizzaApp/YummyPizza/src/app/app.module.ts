@@ -15,6 +15,7 @@ import { Pizza } from './shared/pizza.model';
 import { OrderService } from './shared/order.service';
 import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
 import { SelectquantityComponent } from './orders/selectquantity/selectquantity.component';
+import { InvoicesComponent } from './orders/invoices/invoices.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SelectquantityComponent } from './orders/selectquantity/selectquantity.
     OrdersComponent,
     OrderItemsComponent,
     PizzaorderComponent,
-    SelectquantityComponent
+    SelectquantityComponent,
+    InvoicesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { SelectquantityComponent } from './orders/selectquantity/selectquantity.
     FormsModule,
     MatSelectModule
   ],
-  entryComponents: [PizzaorderComponent, SelectquantityComponent],
+  entryComponents: [PizzaorderComponent, SelectquantityComponent, InvoicesComponent],
   providers: [OrderService ],
   bootstrap: [AppComponent]
 })
