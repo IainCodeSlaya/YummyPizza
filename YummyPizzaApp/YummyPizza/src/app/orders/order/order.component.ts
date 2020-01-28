@@ -15,6 +15,7 @@ import { SelectquantityComponent } from '../selectquantity/selectquantity.compon
 import { Returnorder } from 'src/app/shared/returnorder.model';
 import { InvoicesComponent } from '../invoices/invoices.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -37,6 +38,7 @@ export class OrderComponent implements OnInit {
   constructor(
     private Orderservice: OrderService,
     private dialog: MatDialog,
+    private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -271,6 +273,9 @@ export class OrderComponent implements OnInit {
       this.Orderservice.orderData.OTotal = this.Orderservice.orderData.OTotal - this.Orderservice.itemList[i].Total;
       this.Orderservice.itemList.splice(i, 1);
       this.Orderservice.orderItemsList.splice(i, 1);
+      if(this.Orderservice.itemList.length === 0) {
+        this.resetForm();
+      }
     }
   }
 
@@ -303,6 +308,10 @@ export class OrderComponent implements OnInit {
       this.toastr.error('Please select items for the order', 'Yummy Pizza');
     }
     return this.isValid;
+  }
+
+  backToEmployee() {
+    this.router.navigate(['/employee']);
   }
 }
 

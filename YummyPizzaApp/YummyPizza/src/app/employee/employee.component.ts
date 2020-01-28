@@ -3,6 +3,7 @@ import { Employee } from '../shared/employee.model';
 import { EmployeeService } from '../shared/employee.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -29,7 +30,9 @@ export class EmployeeComponent implements OnInit {
   ]
 */
   constructor(private service: EmployeeService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private router: Router,
+              private currentRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.resetForm();
@@ -89,6 +92,11 @@ export class EmployeeComponent implements OnInit {
   populateForm(emp: Employee){
     this.service.formData = Object.assign({}, emp);
   }
+
+  newRoute() {
+    this.router.navigate(['/order']);
+  }
+
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record?')) {
         this.service.deleteEmployee(id).subscribe(res => {

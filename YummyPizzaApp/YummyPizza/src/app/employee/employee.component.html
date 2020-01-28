@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="offset-0">
     <h1 class="display-4 text-center">Employees</h1>
     <hr>
     <div class="row">
@@ -47,6 +47,7 @@
             </div>
             <div class="form-group">
               <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+              <button (click)="newRoute()" class="btn btn-lg btn-block">Place an Order</button>
             </div>
           </form>
         </div><!--column-->
@@ -72,6 +73,7 @@
               <td (click)="populateForm(emp)">{{emp.Emp_Contact}}</td>
               <td (click)="populateForm(emp)">{{emp.Emp_ID_Number}}</td>
               <td><button (click)="onDelete(emp.Employee_ID)" class="btn btn-sm btn-outline-danger">Delete</button></td>
+              
           </tr>
           </table>
         
