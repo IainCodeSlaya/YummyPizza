@@ -17,6 +17,7 @@ import { OrderService } from './shared/order.service';
 import { PizzaorderComponent } from './orders/pizzaorder/pizzaorder.component';
 import { SelectquantityComponent } from './orders/selectquantity/selectquantity.component';
 import { InvoicesComponent } from './orders/invoices/invoices.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { InvoicesComponent } from './orders/invoices/invoices.component';
     OrderItemsComponent,
     PizzaorderComponent,
     SelectquantityComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,

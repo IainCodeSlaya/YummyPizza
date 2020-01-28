@@ -1,0 +1,91 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Employees</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+          <form #form="ngForm" (submit)="onSubmit(this.service.formData)" *ngIf="this.service.formData" autocomplete="off">
+            <input type="hidden" name="Employee_ID" #Employee_ID="ngModel" [(ngModel)]="service.formData.Employee_ID" readonly>
+            <div class="form-group">
+              <label>NAME</label>
+              <input name="Emp_Name" #Emp_Name="ngModel" [(ngModel)]="service.formData.Emp_Name" class="form-control" required>
+              <div class="validation-error" *ngIf="Emp_Name.invalid && Emp_Name.touched">This field is required.</div>
+            </div>
+            <div class="form-group">
+              <label>Surname</label>
+              <input name="Emp_Surname" #Emp_Surname="ngModel" [(ngModel)]="service.formData.Emp_Surname" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input name="Emp_Email" #Emp_Email="ngModel" [(ngModel)]="service.formData.Emp_Email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input name="Emp_Address" #Emp_Address="ngModel" [(ngModel)]="service.formData.Emp_Address" class="form-control">
+            </div>
+            <div class="form-row">
+              <div class="form-group  col-md-6">
+                <label>Contact</label>
+                <input name="Emp_Contact" #Emp_Contact="ngModel" [(ngModel)]="service.formData.Emp_Contact" class="form-control"required>
+              </div>
+              <div class="form-group  col-md-6">
+                <label>ID Number</label>
+                <input name="Emp_ID_Number" #Emp_ID_Number="ngModel" [(ngModel)]="service.formData.Emp_ID_Number" class="form-control"required>
+              </div>
+              <div class="form-group  col-md-6">
+                <label>User ID</label>
+                <input name="User_ID" #User_ID="ngModel" [(ngModel)]="service.formData.User_ID" class="form-control"readonly>
+              </div>
+              <div class="form-group  col-md-6">
+                <label>Gender</label>
+                <input name="Gender_ID" #Gender_ID="ngModel" [(ngModel)]="service.formData.Gender_ID" class="form-control"readonly>
+              </div>
+              <div class="form-group  col-md-6">
+                <label>Emp Type ID</label>
+                <input name="Emp_Type_ID" #Emp_Type_ID="ngModel" [(ngModel)]="service.formData.Emp_Type_ID" class="form-control"readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+            </div>
+          </form>
+        </div><!--column-->
+        <div class="col-md-9">
+          <table class="table table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Contatct</th>
+              <th>Employee ID</th>
+              <th></th>
+            </tr>
+            <!-- <tr *ngIf="service.employeeList.length === 0">
+              <td>No exisiting employees</td>
+            </tr> -->
+            <tr *ngFor= "let emp of employeeList">
+              <td (click)="populateForm(emp)">{{emp.Emp_Name}}</td>
+              <td (click)="populateForm(emp)">{{emp.Emp_Surname}}</td>
+              <td (click)="populateForm(emp)">{{emp.Emp_Email}}</td>
+              <td (click)="populateForm(emp)">{{emp.Emp_Address}}</td>
+              <td (click)="populateForm(emp)">{{emp.Emp_Contact}}</td>
+              <td (click)="populateForm(emp)">{{emp.Emp_ID_Number}}</td>
+              <td><button (click)="onDelete(emp.Employee_ID)" class="btn btn-sm btn-outline-danger">Delete</button></td>
+          </tr>
+          </table>
+        
+      </div><!--row-->
+  </div>
+</div>
+
+<!--Let me try to add a grid to see if it will work-->
+<!--
+<ag-grid-angular
+    style="width: 500px; height: 500px; padding-top:10px"
+    class="ag-theme-balham"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    >
+</ag-grid-angular>
+-->
